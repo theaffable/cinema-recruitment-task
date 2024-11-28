@@ -1,5 +1,8 @@
 # Fast & Furious cinema
 
+### API documentation
+Full API documentation is located in `/docs/api.yml`. You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
+
 ### Q&A
 **Q:** requirements state that I should use OpenAPI 2.0, but it's an old standard - should I use 3.0 instead?\
 **A**: at first glance 2.0 seems to be good enough so I'll stick with that, but if needed I'll upgrade to 3.0

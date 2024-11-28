@@ -1,0 +1,295 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Fast & Furious cinema"
+  description: "Backend API documentation for Fast & Furious cinema"
+host: "api.example.com"
+basePath: "/api"
+schemes:
+  - "http"
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+
+paths:
+  /showtimes:
+    post:
+      summary: "Create new movie showtime"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: body
+          name: CreateShowtimeRequest
+          schema:
+            $ref: "#/definitions/CreateShowtimeRequest"
+      responses:
+        201:
+          description: "Showtime created"
+          schema:
+            $ref: "#/definitions/ShowtimeResponse"
+        401:
+          description: "Client is not authorized"
+    get:
+      summary: "Get a list of showtimes"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: query
+          name: movie_id
+          type: string
+          format: uuid
+        - in: query
+          name: date_start_gte
+          type: string
+          format: date-time
+        - in: query
+          name: date_start_lte
+          type: string
+          format: date-time
+      responses:
+        200:
+          description: "List of showtimes that match the given criteria or an empty list if no matching items are found"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ShowtimeResponse"
+        401:
+          description: "Client is not authorized"
+  /showtimes/{showtimeId}:
+    patch:
+      summary: "Modify movie showtime"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: showtimeId
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: UpdateShowtimeRequest
+          schema:
+            $ref: "#/definitions/UpdateShowtimeRequest"
+      responses:
+        200:
+          description: "Showtime has been updated"
+          schema:
+            $ref: "#/definitions/ShowtimeResponse"
+        400:
+          description: "At least one property needs to be modified"
+        401:
+          description: "Client is not authorized"
+        404:
+          description: "Showtime not found"
+    delete:
+      summary: "Delete movie showtime"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: showtimeId
+          type: string
+          format: uuid
+          required: true
+      responses:
+        204:
+          description: "Showtime has been deleted"
+        401:
+          description: "Client is not authorized"
+        404:
+          description: "Showtime not found"
+  /movies/{movieId}:
+    get:
+      summary: "Get a list of movies"
+      parameters:
+        - in: path
+          name: movieId
+          type: string
+          format: uuid
+          required: true
+        - in: query
+          name: name
+          type: string
+          description: "Returns the movies that contain given phrase in the title"
+        - in: query
+          name: release_year_gte
+          type: integer
+          description: "Returns the movies released during or after given year"
+        - in: query
+          name: release_year_lte
+          type: integer
+          description: "Returns the movies released during or before given year"
+      responses:
+        200:
+          description: "List of movies matching given criteria  or an empty list if no matching items are found"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/MovieResponse"
+        401:
+          description: "Client is not authorized"
+  /movies/{movieId}/rating:
+    post:
+      summary: "Rate given movie"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: movieId
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: CreateMovieRatingRequest
+          schema:
+            $ref: "#/definitions/MovieRatingRequest"
+      responses:
+        201:
+          description: "Rating has been created"
+          schema:
+            $ref: "#/definitions/MovieRatingResponse"
+        400:
+          description: "This user already rated this movie. Consider using PUT method on the same endpoint to update rating for this user"
+        401:
+          description: "Client is not authorized"
+    put:
+      summary: "Change rating for given movie"
+      security:
+        - basicAuth: []
+      parameters:
+        - in: path
+          name: movieId
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: CreateMovieRatingRequest
+          schema:
+            $ref: "#/definitions/MovieRatingRequest"
+      responses:
+        200:
+          description: "Rating has been modified"
+          schema:
+            $ref: "#/definitions/MovieRatingResponse"
+        401:
+          description: "Client is not authorized"
+
+definitions:
+  Price:
+    type: object
+    properties:
+      amount:
+        type: string
+        format: "decimal"
+      currency:
+        type: string
+        enum: ["EUR", "USD"]
+    required:
+      - amount
+      - currency
+
+  ShowtimeResponse:
+    type: object
+    properties:
+      movie_catalog_id:
+        type: string
+        format: uuid
+      date_start:
+        type: string
+        format: date-time
+      date_end:
+        type: string
+        format: date-time
+      price_override:
+        $ref: "#/definitions/Price"
+    required:
+      - movie_catalog_id
+      - date_start
+      - date_end
+
+  CreateShowtimeRequest:
+    type: object
+    properties:
+      movie_catalog_id:
+        type: string
+        format: uuid
+      date_start:
+        type: string
+        format: date-time
+      date_end:
+        type: string
+        format: date-time
+      price_override:
+        $ref: "#/definitions/Price"
+    required:
+      - movie_catalog_id
+      - date_start
+      - date_end
+
+  UpdateShowtimeRequest:
+    type: object
+    minProperties: 1
+    properties:
+      movie_catalog_id:
+        type: string
+        format: uuid
+      date_start:
+        type: string
+        format: date-time
+      date_end:
+        type: string
+        format: date-time
+      price_override:
+        $ref: "#/definitions/Price"
+
+  MovieResponse:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      release_date:
+        type: string
+        format: date-time
+      rating:
+        type: string
+        format: decimal
+      imdb_rating:
+        type: string
+        format: decimal
+      runtime:
+        type: string
+    required:
+      - name
+      - description
+      - release_date
+      - rating
+      - imdb_rating
+      - runtime
+
+  MovieRatingRequest:
+    type: object
+    properties:
+      rating:
+        type: integer
+        minimum: 1
+        maximum: 5
+    required:
+      - rating
+
+  MovieRatingResponse:
+    type: object
+    properties:
+      rating:
+        description: "Rating created/edited by given user"
+        type: string
+        format: decimal
+      new_avg_movie_rating:
+        description: "New average rating that includes rating created/edited by the user"
+        type: string
+        format: decimal
+    required:
+      - rating
+      - new_avg_movie_rating

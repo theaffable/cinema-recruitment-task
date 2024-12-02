@@ -81,7 +81,7 @@ paths:
         401:
           description: "Client is not authorized"
         404:
-          description: "Showtime not found"
+          description: "Showtime with given ID was not found"
     delete:
       summary: "Delete movie showtime"
       security:
@@ -98,37 +98,25 @@ paths:
         401:
           description: "Client is not authorized"
         404:
-          description: "Showtime not found"
+          description: "Showtime with given ID was not found"
   /movies/{movieId}:
     get:
-      summary: "Get a list of movies"
+      summary: "Get movie details"
       parameters:
         - in: path
           name: movieId
           type: string
           format: uuid
           required: true
-        - in: query
-          name: name
-          type: string
-          description: "Returns the movies that contain given phrase in the title"
-        - in: query
-          name: release_year_gte
-          type: integer
-          description: "Returns the movies released during or after given year"
-        - in: query
-          name: release_year_lte
-          type: integer
-          description: "Returns the movies released during or before given year"
       responses:
         200:
-          description: "List of movies matching given criteria  or an empty list if no matching items are found"
+          description: "Details of given movie"
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/MovieResponse"
+            $ref: "#/definitions/MovieResponse"
         401:
           description: "Client is not authorized"
+        404:
+          description: "Movie with given ID was not found"
   /movies/{movieId}/rating:
     post:
       summary: "Rate given movie"

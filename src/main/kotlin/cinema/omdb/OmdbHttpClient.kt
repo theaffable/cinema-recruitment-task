@@ -2,9 +2,12 @@ package cinema.omdb
 
 import cinema.HttpClientException
 import cinema.movies.MovieId
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.coroutines.executeAsync
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
@@ -18,11 +21,13 @@ class OmdbHttpClient(
     private val serializer: Json
 ) {
 
-    fun fetchMovieDetails(movieId: MovieId): OmdbMovieResponse? {
-        client.newCall(get(movieId)).execute().use { response ->
-            if (!response.isSuccessful) throw HttpClientException(statusCode = response.code)
-
-            return serializer.decodeFromString(response.body!!.string())
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    suspend fun fetchMovieDetails(movieId: MovieId): OmdbMovieResponse? {
+        val call = client.newCall(get(movieId))
+        return call.executeAsync().use { response ->
+            withContext(Dispatchers.IO) { // switches given coroutine to a thread pool optimized for IO operations
+                if (response.isSuccessful) serializer.decodeFromString<OmdbMovieResponse>(response.body!!.string()) else throw HttpClientException(statusCode = response.code)
+            }
         }
     }
 

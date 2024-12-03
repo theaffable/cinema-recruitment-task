@@ -4,10 +4,10 @@
 Before you run this application you need to configure OpenMovieDatabase api key. The key is loaded through an environment variable `OMDB_API_KEY`.
 
 If you're using bash simply run\
-`export OMDB_API_PATH=<YOUR_API_KEY>`
+`export OMDB_API_KEY=<YOUR_API_KEY>`
 
 
-### Usage
+### Running the project
 TODO: add docker compose command to run the app & db
 
 ### API documentation
@@ -32,7 +32,7 @@ Full API documentation is located in `/docs/api.yml`. You can use [Swagger Edito
     - pros: industry standard, field tested, lots of libraries to help with implementation
     - cons: requires significantly more work than API_KEY / basic auth solutions
 
-After some consideration I decided to go with Basic Auth since I can implement it quickly and it can solve 2 of my issues:
+After some consideration I decided to go with Basic Auth since I can implement it quickly, and it can solve 2 most important issues:
   - verifying if the user is an owner
   - verifying if the user has already rated a movie
 

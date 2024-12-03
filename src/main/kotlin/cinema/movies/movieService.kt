@@ -4,6 +4,7 @@ import cinema.catalog.MovieCatalogService
 import cinema.omdb.OmdbHttpClient
 import cinema.omdb.OmdbMovieResponse
 import cinema.parseOmdbDate
+import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
 
 interface MovieService {
@@ -17,7 +18,9 @@ class MovieHttpService(
 ): MovieService {
     override fun getMovieDetails(movieId: MovieId): Movie? {
         if (!movieCatalogService.isInCatalog(movieId)) return null
-        return omdbHttpClient.fetchMovieDetails(movieId).toMovie()
+        return runBlocking {
+            omdbHttpClient.fetchMovieDetails(movieId).toMovie()
+        }
     }
 }
 

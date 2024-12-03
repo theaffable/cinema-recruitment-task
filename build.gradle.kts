@@ -12,9 +12,9 @@ repositories {
 
 dependencies {
     implementation(platform(libs.spring.boot.bom))
-    implementation(libs.kotlinx.serialization)
-    implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.web)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.bundles.spring)
+    implementation(libs.okhttp.coroutines)
     implementation(libs.okhttp)
     testImplementation(kotlin("test"))
     testImplementation(libs.bundles.test)

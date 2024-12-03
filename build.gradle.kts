@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlin.reflect)
     implementation(libs.spring.boot.starter.web)
+    implementation(libs.okhttp)
     testImplementation(kotlin("test"))
     testImplementation(libs.bundles.test)
 }

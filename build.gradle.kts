@@ -16,6 +16,7 @@ dependencies {
     implementation(libs.bundles.spring)
     implementation(libs.okhttp.coroutines)
     implementation(libs.okhttp)
+    implementation(libs.resilience4j)
     testImplementation(kotlin("test"))
     testImplementation(libs.bundles.test)
 }

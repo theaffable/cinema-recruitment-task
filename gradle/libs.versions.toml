@@ -8,6 +8,7 @@ spring-dependency-management = "1.1.6"
 junit = "2.1.0"
 okhttp = "4.12.0"
 okhttp-coroutines = "5.0.0-alpha.14"
+resilience4j = "2.2.0"
 
 [libraries]
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
@@ -15,6 +16,9 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-boot-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
+resilience4j = { module = "io.github.resilience4j:resilience4j-spring-boot3", version.ref = "resilience4j" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-coroutines = { module = "com.squareup.okhttp3:okhttp-coroutines", version.ref = "okhttp-coroutines" }
 
@@ -31,5 +35,5 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 
 [bundles]
 kotlin = ["kotlinx-serialization", "kotlin-reflect", "kotlin-coroutines"]
-spring = ["spring-boot-starter-web", "spring-boot-bom"]
+spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop"]
 test = ["junit", "spring-boot-starter-test"]

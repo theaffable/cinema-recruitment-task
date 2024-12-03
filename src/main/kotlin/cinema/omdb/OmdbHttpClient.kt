@@ -2,6 +2,8 @@ package cinema.omdb
 
 import cinema.HttpClientException
 import cinema.movies.MovieId
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
+import io.github.resilience4j.retry.annotation.Retry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -22,6 +24,8 @@ class OmdbHttpClient(
 ) {
 
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    @CircuitBreaker(name = "omdbApi")
+    @Retry(name = "omdbApi")
     suspend fun fetchMovieDetails(movieId: MovieId): OmdbMovieResponse? {
         val call = client.newCall(get(movieId))
         return call.executeAsync().use { response ->

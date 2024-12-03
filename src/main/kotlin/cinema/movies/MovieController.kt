@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class MovieController(val movieService: MovieHttpService) {
+class MovieController(val movieService: MovieService) {
 
     @GetMapping("/movies/{movieId}")
     fun getMovieDetails(@PathVariable movieId: MovieId): Movie {

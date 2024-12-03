@@ -1,5 +1,15 @@
 # Fast & Furious cinema
 
+### Configuration
+Before you run this application you need to configure OpenMovieDatabase api key. The key is loaded through an environment variable `OMDB_API_KEY`.
+
+If you're using bash simply run\
+`export OMDB_API_PATH=<YOUR_API_KEY>`
+
+
+### Usage
+TODO: add docker compose command to run the app & db
+
 ### API documentation
 Full API documentation is located in `/docs/api.yml`. You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
 

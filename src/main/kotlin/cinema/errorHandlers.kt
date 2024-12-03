@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ErrorHandler {
 
     @ExceptionHandler
-    fun handleMovieNotFound(error: MovieNotFound): ResponseEntity<String> =
-        ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.message)
+    fun handleMovieNotFound(e: MovieNotFound): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
+
+    @ExceptionHandler
+    fun handleHttpClientException(e: HttpClientException): ResponseEntity<String> {
+        val msg = "Internal http call returned status ${e.statusCode}"
+        return ResponseEntity.status(HttpStatus.resolve(e.statusCode) ?: HttpStatus.BAD_REQUEST).body(msg)
+    }
 }

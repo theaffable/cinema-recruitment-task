@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class Configuration(
-    @Value("#\${omdb.cacheDir}")
+    @Value("\${omdb.cacheDir}")
     private val cacheDir: String
 ) {
     @Bean

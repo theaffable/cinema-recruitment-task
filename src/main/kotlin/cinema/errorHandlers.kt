@@ -13,6 +13,10 @@ class ErrorHandler {
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
     @ExceptionHandler
+    fun handleCatalogEntryNotFound(e: CatalogEntryNotFound): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
+
+    @ExceptionHandler
     fun handleHttpClientException(e: HttpClientException): ResponseEntity<String> {
         val msg = "Internal http call returned status ${e.statusCode}"
         return ResponseEntity.status(HttpStatus.resolve(e.statusCode) ?: HttpStatus.BAD_REQUEST).body(msg)

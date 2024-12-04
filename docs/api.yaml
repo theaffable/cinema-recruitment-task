@@ -106,7 +106,7 @@ paths:
         - in: path
           name: movieId
           type: string
-          format: uuid
+          format: imdb-id
           required: true
       responses:
         200:
@@ -180,9 +180,14 @@ definitions:
   ShowtimeResponse:
     type: object
     properties:
-      movie_catalog_id:
+      id:
         type: string
         format: uuid
+      movie_id:
+        type: string
+        format: uuid
+      title:
+        type: string
       date_start:
         type: string
         format: date-time
@@ -192,7 +197,9 @@ definitions:
       price_override:
         $ref: "#/definitions/Price"
     required:
-      - movie_catalog_id
+      - id
+      - movie_id
+      - title
       - date_start
       - date_end
 

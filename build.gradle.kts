@@ -27,7 +27,11 @@ tasks.test {
 kotlin {
     jvmToolchain(21)
     compilerOptions {
-        // enable kotlin support for JSR 305 annotations (@NotNull etc.) - this makes dealing with Spring nullable types less painful
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+        freeCompilerArgs.addAll(
+            // enable kotlin support for JSR 305 annotations (@NotNull etc.) - this makes dealing with Spring nullable types less painful
+            "-Xjsr305=strict",
+            // enable kotlin built-in Uuid type
+            "-opt-in=kotlin.uuid.ExperimentalUuidApi"
+        )
     }
 }

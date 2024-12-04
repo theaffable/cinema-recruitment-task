@@ -12,7 +12,7 @@ interface MovieService {
 }
 
 @Service
-class MovieHttpService(
+class SimpleMovieService(
     private val movieCatalogService: MovieCatalogService,
     private val omdbHttpClient: OmdbHttpClient
 ): MovieService {

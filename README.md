@@ -1,10 +1,9 @@
 # Fast & Furious cinema
 
 ### Configuration
-Before you run this application you need to configure OpenMovieDatabase api key. The key is loaded through an environment variable `OMDB_API_KEY`.
+Before you run this application you need to configure OpenMovieDatabase api key. The key is loaded through an environment variable `OMDB_API_KEY`
 
-If you're using bash simply run\
-`export OMDB_API_KEY=<YOUR_API_KEY>`
+If you're using bash simply run `export OMDB_API_KEY=<YOUR_API_KEY>`
 
 
 ### Running the project

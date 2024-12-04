@@ -2,12 +2,14 @@ package cinema.catalog
 
 import cinema.movies.MovieId
 import java.nio.charset.Charset
+import kotlin.uuid.Uuid
 import kotlinx.serialization.json.Json
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Repository
 
 interface MovieCatalogRepository {
+    fun findById(id: Uuid): MovieCatalogEntry?
     fun contains(movieId: MovieId): Boolean
 }
 
@@ -22,6 +24,8 @@ class MovieCatalogFileBasedRepository(
 
     private fun loadCatalogEntries(): Collection<MovieCatalogEntry> =
         movieCatalogResource.getContentAsString(Charset.defaultCharset()).let { serializer.decodeFromString(it) }
+
+    override fun findById(id: Uuid): MovieCatalogEntry? = movieCatalogEntries.find { it.id.value == id }
 
     override fun contains(movieId: MovieId): Boolean = movieCatalogEntries.any{ it.movieId == movieId }
 }

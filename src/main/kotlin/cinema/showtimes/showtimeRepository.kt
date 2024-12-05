@@ -1,22 +1,32 @@
 package cinema.showtimes
 
+import cinema.ShowtimeNotFound
 import cinema.movies.Movie
 import cinema.movies.MovieId
+import cinema.price.Price
 import java.time.LocalDate
 import java.time.ZonedDateTime
 import kotlin.uuid.Uuid
 import org.springframework.stereotype.Repository
 
 interface ShowtimeRepository {
+    fun findBy(showtimeId: ShowtimeId): Showtime?
     fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime>
     fun create(showtime: Showtime)
+    fun update(
+        showtimeId: ShowtimeId,
+        movie: Movie?,
+        dateTimeStart: ZonedDateTime?,
+        dateTimeEnd: ZonedDateTime?,
+        priceOverride: Price?
+    ): Showtime
 }
 
 @Repository
 class DatabaseShowtimeRepository(): ShowtimeRepository {
     private val showtimes = mutableListOf(
         Showtime(
-            id = ShowtimeId(Uuid.random()),
+            id = ShowtimeId(Uuid.parse("6aef2def-0665-4587-856e-0270da4289e7")),
             movie = Movie(
                 id = MovieId(value = "test-movie-id"),
                 title = "any title",
@@ -36,6 +46,8 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
         )
     )
 
+    override fun findBy(showtimeId: ShowtimeId) = showtimes.find { showtimeId == it.id }
+
     override fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime> =
         showtimes
             .filter { movieId == null || movieId == it.movie.id }
@@ -44,5 +56,23 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
 
     override fun create(showtime: Showtime) {
         showtimes.add(showtime)
+    }
+
+    override fun update(
+        showtimeId: ShowtimeId,
+        movie: Movie?,
+        dateTimeStart: ZonedDateTime?,
+        dateTimeEnd: ZonedDateTime?,
+        priceOverride: Price?
+    ): Showtime {
+        val showtime = findBy(showtimeId) ?: throw ShowtimeNotFound(showtimeId)
+        val updated = showtime.copy(
+            movie = movie ?: showtime.movie,
+            dateStart = dateTimeStart ?: showtime.dateStart,
+            dateEnd = dateTimeEnd ?: showtime.dateEnd,
+            priceOverride = priceOverride ?: showtime.priceOverride
+        )
+        showtimes.replaceAll { if (it.id == showtimeId) updated else it }
+        return updated
     }
 }

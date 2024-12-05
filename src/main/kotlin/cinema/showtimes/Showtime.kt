@@ -35,6 +35,16 @@ data class CreateShowtimeRequest(
 )
 
 @Serializable
+data class ModifyShowtimeRequest(
+    val movieCatalogId: MovieCatalogId? = null,
+    @Serializable(with = ZonedDateTimeSerializer::class)
+    val dateStart: ZonedDateTime? = null,
+    @Serializable(with = ZonedDateTimeSerializer::class)
+    val dateEnd: ZonedDateTime? = null,
+    val priceOverride: Price? = null
+)
+
+@Serializable
 data class ShowtimeResponse(
     val showtimeId: ShowtimeId,
     val movieId: MovieId,

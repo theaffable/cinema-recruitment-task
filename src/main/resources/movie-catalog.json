@@ -6,6 +6,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "5.0",
+      "count": 1
     }
   },
   {
@@ -15,6 +19,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -24,6 +32,10 @@
     "price": {
       "amount": "9.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -33,6 +45,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -42,6 +58,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -51,6 +71,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -60,6 +84,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -69,6 +97,10 @@
     "price": {
       "amount": "7.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   },
   {
@@ -78,6 +110,10 @@
     "price": {
       "amount": "10.50",
       "currency": "USD"
+    },
+    "rating": {
+      "average": "4.5",
+      "count": 100
     }
   }
 ]

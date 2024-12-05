@@ -3,7 +3,7 @@ package cinema.showtimes
 import cinema.errors.ShowtimeNotFoundException
 import cinema.movies.Movie
 import cinema.movies.MovieId
-import cinema.price.Price
+import cinema.catalog.Price
 import java.time.LocalDate
 import java.time.ZonedDateTime
 import kotlin.uuid.Uuid

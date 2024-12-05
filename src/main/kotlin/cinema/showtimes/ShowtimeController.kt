@@ -44,7 +44,7 @@ class ShowtimeController(
     fun update(@PathVariable("showtime_id") showtimeId: String, @RequestBody request: ModifyShowtimeRequest): ShowtimeResponse {
         if (request.isEmpty()) throw EmptyUpdateRequestException()
         return showtimeService.update(
-            showtimeId = showtimeId.toShowtimeId(),
+            showtimeId = showtimeId.asShowtimeId(),
             movieCatalogId = request.movieCatalogId,
             dateTimeStart = request.dateStart,
             dateTimeEnd = request.dateEnd,
@@ -55,7 +55,7 @@ class ShowtimeController(
     @DeleteMapping("/{showtime_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable("showtime_id") showtimeId: String) {
-        showtimeService.delete(showtimeId.toShowtimeId())
+        showtimeService.delete(showtimeId.asShowtimeId())
     }
 }
 
@@ -70,7 +70,7 @@ private fun Showtime.toResponse() = ShowtimeResponse(
 
 
 
-private fun String.toShowtimeId(): ShowtimeId = ShowtimeId(this.parseAsUuid())
+private fun String.asShowtimeId(): ShowtimeId = ShowtimeId(this.parseAsUuid())
 
 private fun ModifyShowtimeRequest.isEmpty() =
     listOf(this.movieCatalogId, this.dateStart, this.dateEnd, this.priceOverride).all { it == null }

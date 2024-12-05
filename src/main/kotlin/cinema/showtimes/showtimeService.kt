@@ -7,7 +7,7 @@ import cinema.catalog.MovieCatalogId
 import cinema.catalog.MovieCatalogService
 import cinema.movies.MovieId
 import cinema.movies.MovieService
-import cinema.price.Price
+import cinema.catalog.Price
 import java.time.ZonedDateTime
 import kotlin.uuid.Uuid
 import org.springframework.stereotype.Service

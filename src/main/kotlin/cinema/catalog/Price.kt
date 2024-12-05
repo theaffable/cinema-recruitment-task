@@ -1,4 +1,4 @@
-package cinema.price
+package cinema.catalog
 
 import cinema.serializers.BigDecimalSerializer
 import java.math.BigDecimal

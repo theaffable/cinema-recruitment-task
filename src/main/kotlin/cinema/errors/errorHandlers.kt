@@ -20,7 +20,7 @@ class ErrorHandler {
     fun handleShowtimeNotFound(e: ShowtimeNotFoundException): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
-    @ExceptionHandler(exception = [InvalidUuidFormatException::class, EmptyUpdateRequestException::class])
+    @ExceptionHandler(exception = [InvalidUuidFormatException::class, EmptyUpdateRequestException::class, RatingValueOutOfRangeException::class])
     fun handleClientError(e: Exception): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.message)
 

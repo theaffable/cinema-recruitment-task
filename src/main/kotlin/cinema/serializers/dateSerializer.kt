@@ -1,4 +1,4 @@
-package cinema
+package cinema.serializers
 
 import java.time.LocalDate
 import java.time.ZonedDateTime

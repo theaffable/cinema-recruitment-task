@@ -1,6 +1,6 @@
 package cinema.movies
 
-import cinema.LocalDateSerializer
+import cinema.serializers.LocalDateSerializer
 import java.time.LocalDate
 import kotlinx.serialization.Serializable
 

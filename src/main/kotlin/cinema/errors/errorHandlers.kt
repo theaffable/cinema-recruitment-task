@@ -1,4 +1,4 @@
-package cinema
+package cinema.errors
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

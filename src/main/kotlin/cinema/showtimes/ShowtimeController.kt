@@ -1,6 +1,6 @@
 package cinema.showtimes
 
-import cinema.InvalidUuidFormat
+import cinema.errors.InvalidUuidFormat
 import cinema.movies.MovieId
 import java.time.ZonedDateTime
 import kotlin.uuid.Uuid

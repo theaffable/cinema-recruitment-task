@@ -1,6 +1,6 @@
 package cinema.omdb
 
-import cinema.HttpClientException
+import cinema.errors.HttpClientException
 import cinema.movies.MovieId
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import io.github.resilience4j.retry.annotation.Retry

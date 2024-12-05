@@ -1,4 +1,4 @@
-package cinema
+package cinema.errors
 
 import cinema.catalog.MovieCatalogId
 import cinema.movies.MovieId

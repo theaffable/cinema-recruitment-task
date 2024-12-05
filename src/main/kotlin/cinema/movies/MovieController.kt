@@ -1,6 +1,6 @@
 package cinema.movies
 
-import cinema.MovieNotFound
+import cinema.errors.MovieNotFound
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController

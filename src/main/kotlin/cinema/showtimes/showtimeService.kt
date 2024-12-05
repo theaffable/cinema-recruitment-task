@@ -2,6 +2,7 @@ package cinema.showtimes
 
 import cinema.CatalogEntryNotFound
 import cinema.MovieNotFound
+import cinema.ShowtimeNotFound
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.MovieCatalogService
 import cinema.movies.MovieId
@@ -12,8 +13,26 @@ import kotlin.uuid.Uuid
 import org.springframework.stereotype.Service
 
 interface ShowtimeService {
-    fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime>
-    fun create(movieCatalogId: MovieCatalogId, dateTimeStart: ZonedDateTime, dateTimeEnd: ZonedDateTime, priceOverride: Price?): Showtime
+    fun findBy(
+        movieId: MovieId?,
+        startsBefore: ZonedDateTime?,
+        startsAfter: ZonedDateTime?
+    ): List<Showtime>
+
+    fun create(
+        movieCatalogId: MovieCatalogId,
+        dateTimeStart: ZonedDateTime,
+        dateTimeEnd: ZonedDateTime,
+        priceOverride: Price?
+    ): Showtime
+
+    fun update(
+        showtimeId: ShowtimeId,
+        movieCatalogId: MovieCatalogId?,
+        dateTimeStart: ZonedDateTime?,
+        dateTimeEnd: ZonedDateTime?,
+        priceOverride: Price?
+    ): Showtime
 }
 
 @Service
@@ -22,14 +41,23 @@ class SimpleShowtimeService(
     private val movieCatalogService: MovieCatalogService,
     private val movieService: MovieService
 ): ShowtimeService {
-    override fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime> =
+    override fun findBy(
+        movieId: MovieId?,
+        startsBefore: ZonedDateTime?,
+        startsAfter: ZonedDateTime?
+    ): List<Showtime> =
         showtimeRepository.findBy(
             movieId = movieId,
             startsBefore = startsBefore,
             startsAfter = startsAfter
         )
 
-    override fun create(movieCatalogId: MovieCatalogId, dateTimeStart: ZonedDateTime, dateTimeEnd: ZonedDateTime, priceOverride: Price?): Showtime {
+    override fun create(
+        movieCatalogId: MovieCatalogId,
+        dateTimeStart: ZonedDateTime,
+        dateTimeEnd: ZonedDateTime,
+        priceOverride: Price?
+    ): Showtime {
         val catalogEntry = movieCatalogService.findById(movieCatalogId) ?: throw CatalogEntryNotFound(movieCatalogId)
         val movie = movieService.getMovieDetails(catalogEntry.movieId) ?: throw MovieNotFound(catalogEntry.movieId)
         return Showtime(
@@ -39,5 +67,25 @@ class SimpleShowtimeService(
             dateEnd = dateTimeEnd,
             priceOverride = priceOverride
         ).also { showtimeRepository.create(it) }
+    }
+
+    override fun update(
+        showtimeId: ShowtimeId,
+        movieCatalogId: MovieCatalogId?,
+        dateTimeStart: ZonedDateTime?,
+        dateTimeEnd: ZonedDateTime?,
+        priceOverride: Price?
+    ): Showtime {
+        val showtime = showtimeRepository.findBy(showtimeId) ?: throw ShowtimeNotFound(showtimeId)
+        val movie = movieCatalogId
+            ?. let { movieCatalogService.findById(it) }
+            ?. let { movieService.getMovieDetails(it.movieId) }
+        return showtimeRepository.update(
+            showtimeId = showtimeId,
+            movie = movie ?: showtime.movie,
+            dateTimeStart = dateTimeStart ?: showtime.dateStart,
+            dateTimeEnd = dateTimeEnd ?: showtime.dateEnd,
+            priceOverride = priceOverride ?: showtime.priceOverride
+        )
     }
 }

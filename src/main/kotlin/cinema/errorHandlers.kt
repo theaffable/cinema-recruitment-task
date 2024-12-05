@@ -17,6 +17,15 @@ class ErrorHandler {
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
     @ExceptionHandler
+    fun handleShowtimeNotFound(e: ShowtimeNotFound): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
+
+    @ExceptionHandler
+    fun handleInvalidUuidFormat(e: InvalidUuidFormat): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.message)
+
+
+    @ExceptionHandler
     fun handleHttpClientException(e: HttpClientException): ResponseEntity<String> {
         val msg = "Internal http call returned status ${e.statusCode}"
         return ResponseEntity.status(HttpStatus.resolve(e.statusCode) ?: HttpStatus.BAD_REQUEST).body(msg)

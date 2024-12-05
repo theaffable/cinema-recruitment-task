@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Repository
 
 interface MovieCatalogRepository {
+    fun findAll(): List<MovieCatalogEntry>
     fun findById(id: Uuid): MovieCatalogEntry?
     fun contains(movieId: MovieId): Boolean
 }
@@ -24,6 +25,8 @@ class MovieCatalogFileBasedRepository(
 
     private fun loadCatalogEntries(): Collection<MovieCatalogEntry> =
         movieCatalogResource.getContentAsString(Charset.defaultCharset()).let { serializer.decodeFromString(it) }
+
+    override fun findAll(): List<MovieCatalogEntry> = movieCatalogEntries.toList()
 
     override fun findById(id: Uuid): MovieCatalogEntry? = movieCatalogEntries.find { it.id.value == id }
 

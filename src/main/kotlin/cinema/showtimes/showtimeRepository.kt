@@ -1,6 +1,6 @@
 package cinema.showtimes
 
-import cinema.ShowtimeNotFound
+import cinema.errors.ShowtimeNotFound
 import cinema.movies.Movie
 import cinema.movies.MovieId
 import cinema.price.Price

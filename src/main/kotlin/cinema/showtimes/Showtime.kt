@@ -1,7 +1,7 @@
 package cinema.showtimes
 
-import cinema.SerializableUuid
-import cinema.ZonedDateTimeSerializer
+import cinema.serializers.SerializableUuid
+import cinema.serializers.ZonedDateTimeSerializer
 import cinema.catalog.MovieCatalogId
 import cinema.movies.Movie
 import cinema.movies.MovieId

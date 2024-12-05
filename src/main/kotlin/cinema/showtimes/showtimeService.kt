@@ -1,8 +1,8 @@
 package cinema.showtimes
 
-import cinema.CatalogEntryNotFound
-import cinema.MovieNotFound
-import cinema.ShowtimeNotFound
+import cinema.errors.CatalogEntryNotFound
+import cinema.errors.MovieNotFound
+import cinema.errors.ShowtimeNotFound
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.MovieCatalogService
 import cinema.movies.MovieId

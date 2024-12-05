@@ -1,6 +1,6 @@
 package cinema.price
 
-import cinema.BigDecimalSerializer
+import cinema.serializers.BigDecimalSerializer
 import java.math.BigDecimal
 import kotlinx.serialization.Serializable
 

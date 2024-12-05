@@ -1,4 +1,4 @@
-package cinema
+package cinema.serializers
 
 import java.math.BigDecimal
 import kotlin.uuid.Uuid

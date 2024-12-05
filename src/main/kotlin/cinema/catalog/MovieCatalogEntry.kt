@@ -1,6 +1,6 @@
 package cinema.catalog
 
-import cinema.SerializableUuid
+import cinema.serializers.SerializableUuid
 import cinema.movies.MovieId
 import cinema.price.Price
 import kotlinx.serialization.Serializable

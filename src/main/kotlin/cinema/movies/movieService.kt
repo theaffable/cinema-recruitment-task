@@ -3,7 +3,7 @@ package cinema.movies
 import cinema.catalog.MovieCatalogService
 import cinema.omdb.OmdbHttpClient
 import cinema.omdb.OmdbMovieResponse
-import cinema.parseOmdbDate
+import cinema.serializers.parseOmdbDate
 import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
 

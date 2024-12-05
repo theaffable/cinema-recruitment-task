@@ -1,8 +1,8 @@
 package cinema.showtimes
 
-import cinema.errors.CatalogEntryNotFound
-import cinema.errors.MovieNotFound
-import cinema.errors.ShowtimeNotFound
+import cinema.errors.CatalogEntryNotFoundException
+import cinema.errors.MovieNotFoundException
+import cinema.errors.ShowtimeNotFoundException
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.MovieCatalogService
 import cinema.movies.MovieId
@@ -60,8 +60,8 @@ class SimpleShowtimeService(
         dateTimeEnd: ZonedDateTime,
         priceOverride: Price?
     ): Showtime {
-        val catalogEntry = movieCatalogService.findById(movieCatalogId) ?: throw CatalogEntryNotFound(movieCatalogId)
-        val movie = movieService.getMovieDetails(catalogEntry.movieId) ?: throw MovieNotFound(catalogEntry.movieId)
+        val catalogEntry = movieCatalogService.findById(movieCatalogId) ?: throw CatalogEntryNotFoundException(movieCatalogId)
+        val movie = movieService.getMovieDetails(catalogEntry.movieId) ?: throw MovieNotFoundException(catalogEntry.movieId)
         return Showtime(
             id = ShowtimeId(Uuid.random()),
             movie = movie,
@@ -78,7 +78,7 @@ class SimpleShowtimeService(
         dateTimeEnd: ZonedDateTime?,
         priceOverride: Price?
     ): Showtime {
-        val showtime = showtimeRepository.findBy(showtimeId) ?: throw ShowtimeNotFound(showtimeId)
+        val showtime = showtimeRepository.findBy(showtimeId) ?: throw ShowtimeNotFoundException(showtimeId)
         val movie = movieCatalogId
             ?. let { movieCatalogService.findById(it) }
             ?. let { movieService.getMovieDetails(it.movieId) }

@@ -5,7 +5,7 @@ import cinema.serializers.ZonedDateTimeSerializer
 import cinema.catalog.MovieCatalogId
 import cinema.movies.Movie
 import cinema.movies.MovieId
-import cinema.price.Price
+import cinema.catalog.Price
 import java.time.ZonedDateTime
 import kotlinx.serialization.Serializable
 

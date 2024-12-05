@@ -25,6 +25,51 @@ paths:
             type: array
             items:
               $ref: "#/definitions/MovieCatalogEntryResponse"
+  /catalog/{movie_catalog_id}/rating:
+    post:
+      summary: "Rate movie from the catalog"
+      security:
+        - basicAuth: [ ]
+      parameters:
+        - in: path
+          name: movie_catalog_id
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: CreateMovieRatingRequest
+          schema:
+            $ref: "#/definitions/CreateMovieRatingRequest"
+      responses:
+        201:
+          description: "Rating has been created"
+          schema:
+            $ref: "#/definitions/MovieRatingResponse"
+        400:
+          description: "This user already rated this movie. Consider using PUT method on the same endpoint to update rating for this user"
+        401:
+          description: "Client is not authorized"
+    put:
+      summary: "Change rating for given movie"
+      security:
+        - basicAuth: [ ]
+      parameters:
+        - in: path
+          name: movie_catalog_id
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: CreateMovieRatingRequest
+          schema:
+            $ref: "#/definitions/CreateMovieRatingRequest"
+      responses:
+        200:
+          description: "Rating has been modified"
+          schema:
+            $ref: "#/definitions/MovieRatingResponse"
+        401:
+          description: "Client is not authorized"
 
   /showtimes:
     post:
@@ -133,52 +178,6 @@ paths:
         404:
           description: "Movie with given ID was not found"
 
-  /movies/{movie_id}/rating:
-    post:
-      summary: "Rate given movie"
-      security:
-        - basicAuth: []
-      parameters:
-        - in: path
-          name: movie_id
-          type: string
-          format: uuid
-          required: true
-        - in: body
-          name: CreateMovieRatingRequest
-          schema:
-            $ref: "#/definitions/MovieRatingRequest"
-      responses:
-        201:
-          description: "Rating has been created"
-          schema:
-            $ref: "#/definitions/MovieRatingResponse"
-        400:
-          description: "This user already rated this movie. Consider using PUT method on the same endpoint to update rating for this user"
-        401:
-          description: "Client is not authorized"
-    put:
-      summary: "Change rating for given movie"
-      security:
-        - basicAuth: []
-      parameters:
-        - in: path
-          name: movie_id
-          type: string
-          format: uuid
-          required: true
-        - in: body
-          name: CreateMovieRatingRequest
-          schema:
-            $ref: "#/definitions/MovieRatingRequest"
-      responses:
-        200:
-          description: "Rating has been modified"
-          schema:
-            $ref: "#/definitions/MovieRatingResponse"
-        401:
-          description: "Client is not authorized"
-
 definitions:
   MovieCatalogEntryResponse:
     type: object
@@ -195,6 +194,9 @@ definitions:
       price:
         type: object
         $ref: "#/definitions/Price"
+      rating:
+        type: object
+        $ref: "#/definitions/Rating"
 
   Price:
     type: object
@@ -208,6 +210,15 @@ definitions:
     required:
       - amount
       - currency
+
+  Rating:
+    type: object
+    properties:
+      average:
+        type: string
+        format: decimal
+      count:
+        type: integer
 
   ShowtimeResponse:
     type: object
@@ -296,7 +307,7 @@ definitions:
       - imdb_rating
       - runtime
 
-  MovieRatingRequest:
+  CreateMovieRatingRequest:
     type: object
     properties:
       rating:
@@ -313,10 +324,9 @@ definitions:
         description: "Rating created/edited by given user"
         type: string
         format: decimal
-      new_avg_movie_rating:
-        description: "New average rating that includes rating created/edited by the user"
-        type: string
-        format: decimal
+      new_movie_rating:
+        type: object
+        $ref: "#/definitions/Rating"
     required:
       - rating
       - new_avg_movie_rating

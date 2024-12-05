@@ -8,7 +8,7 @@ import kotlin.uuid.Uuid
 import org.springframework.stereotype.Repository
 
 interface ShowtimeRepository {
-    fun findAll(): List<Showtime>
+    fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime>
     fun create(showtime: Showtime)
 }
 
@@ -36,7 +36,11 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
         )
     )
 
-    override fun findAll(): List<Showtime> = showtimes
+    override fun findBy(movieId: MovieId?, startsBefore: ZonedDateTime?, startsAfter: ZonedDateTime?): List<Showtime> =
+        showtimes
+            .filter { movieId == null || movieId == it.movie.id }
+            .filter { startsBefore == null || it.dateStart.isBefore(startsBefore) }
+            .filter { startsAfter == null || it.dateStart.isAfter(startsAfter) }
 
     override fun create(showtime: Showtime) {
         showtimes.add(showtime)

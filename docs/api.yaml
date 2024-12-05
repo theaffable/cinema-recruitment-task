@@ -13,9 +13,22 @@ securityDefinitions:
     type: basic
 
 paths:
+  /catalog:
+    get:
+      summary: "Get movie catalog for this cinema"
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: "List of movie catalog entries"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/MovieCatalogEntryResponse"
+
   /showtimes:
     post:
-      summary: "Create new movie showtime"
+      summary: "Create movie showtime"
       security:
         - basicAuth: []
       parameters:
@@ -56,6 +69,7 @@ paths:
               $ref: "#/definitions/ShowtimeResponse"
         401:
           description: "Client is not authorized"
+
   /showtimes/{showtimeId}:
     patch:
       summary: "Modify movie showtime"
@@ -99,6 +113,7 @@ paths:
           description: "Client is not authorized"
         404:
           description: "Showtime with given ID was not found"
+
   /movies/{movieId}:
     get:
       summary: "Get movie details"
@@ -117,6 +132,7 @@ paths:
           description: "Client is not authorized"
         404:
           description: "Movie with given ID was not found"
+
   /movies/{movieId}/rating:
     post:
       summary: "Rate given movie"
@@ -164,6 +180,22 @@ paths:
           description: "Client is not authorized"
 
 definitions:
+  MovieCatalogEntryResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      movie_id:
+        type: string
+        format: uuid
+      title:
+        description: "Movie title"
+        type: string
+      price:
+        type: string
+        format: decimal
+
   Price:
     type: object
     properties:

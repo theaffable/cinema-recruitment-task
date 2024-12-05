@@ -33,6 +33,8 @@ interface ShowtimeService {
         dateTimeEnd: ZonedDateTime?,
         priceOverride: Price?
     ): Showtime
+
+    fun delete(showtimeId: ShowtimeId)
 }
 
 @Service
@@ -87,5 +89,9 @@ class SimpleShowtimeService(
             dateTimeEnd = dateTimeEnd ?: showtime.dateEnd,
             priceOverride = priceOverride ?: showtime.priceOverride
         )
+    }
+
+    override fun delete(showtimeId: ShowtimeId) {
+        showtimeRepository.delete(showtimeId)
     }
 }

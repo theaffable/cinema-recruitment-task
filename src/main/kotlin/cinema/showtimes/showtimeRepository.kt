@@ -20,6 +20,7 @@ interface ShowtimeRepository {
         dateTimeEnd: ZonedDateTime?,
         priceOverride: Price?
     ): Showtime
+    fun delete(showtimeId: ShowtimeId)
 }
 
 @Repository
@@ -74,5 +75,10 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
         )
         showtimes.replaceAll { if (it.id == showtimeId) updated else it }
         return updated
+    }
+
+    override fun delete(showtimeId: ShowtimeId) {
+        val wasRemoved = showtimes.removeIf { showtimeId == it.id }
+        if (!wasRemoved) throw ShowtimeNotFound(showtimeId)
     }
 }

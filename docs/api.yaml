@@ -16,8 +16,6 @@ paths:
   /catalog:
     get:
       summary: "Get movie catalog for this cinema"
-      security:
-        - basicAuth: []
       responses:
         200:
           description: "List of movie catalog entries"
@@ -90,8 +88,6 @@ paths:
           description: "Client is not authorized"
     get:
       summary: "Get a list of showtimes"
-      security:
-        - basicAuth: []
       parameters:
         - in: query
           name: movie_id

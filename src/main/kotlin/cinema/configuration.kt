@@ -2,12 +2,16 @@ package cinema
 
 import java.io.File
 import java.util.concurrent.TimeUnit
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNamingStrategy
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.http.converter.json.KotlinSerializationJsonHttpMessageConverter
 
 @Configuration
 class Configuration(
@@ -26,6 +30,21 @@ class Configuration(
             ))
             .build()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Bean
-    fun configureSerializer(): Json = Json { ignoreUnknownKeys = true }
+    @Primary
+    fun configureSnakeCaseSerializer() = Json {
+        prettyPrint = true
+        ignoreUnknownKeys = true
+        namingStrategy = JsonNamingStrategy.SnakeCase
+    }
+
+    @Bean
+    fun configureSpringSerializer(): KotlinSerializationJsonHttpMessageConverter =
+        KotlinSerializationJsonHttpMessageConverter(configureSnakeCaseSerializer())
+
+    @Bean(name = ["omdbSerializer"])
+    fun configureOmdbSerializer(): Json = Json {
+        ignoreUnknownKeys = true
+    }
 }

@@ -2,13 +2,15 @@ package cinema.catalog
 
 import cinema.SerializableUuid
 import cinema.movies.MovieId
+import cinema.price.Price
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieCatalogEntry(
     val id: MovieCatalogId,
     val movieId: MovieId,
-    val title: String
+    val title: String,
+    val price: Price
 )
 
 @JvmInline

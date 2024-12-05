@@ -1,5 +1,6 @@
 package cinema
 
+import java.math.BigDecimal
 import kotlin.uuid.Uuid
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -17,4 +18,12 @@ object UuidSerializer : KSerializer<Uuid> {
     override fun deserialize(decoder: Decoder) = Uuid.parse(decoder.decodeString())
 
     override fun serialize(encoder: Encoder, value: Uuid) = encoder.encodeString(value.toString())
+}
+
+object BigDecimalSerializer : KSerializer<BigDecimal> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("BigDecimal", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): BigDecimal = BigDecimal(decoder.decodeString())
+
+    override fun serialize(encoder: Encoder, value: BigDecimal) = encoder.encodeString(value.toString())
 }

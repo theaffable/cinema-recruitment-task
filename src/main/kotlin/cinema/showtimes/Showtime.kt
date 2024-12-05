@@ -5,6 +5,7 @@ import cinema.ZonedDateTimeSerializer
 import cinema.catalog.MovieCatalogId
 import cinema.movies.Movie
 import cinema.movies.MovieId
+import cinema.price.Price
 import java.time.ZonedDateTime
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,8 @@ data class Showtime(
     @Serializable(with = ZonedDateTimeSerializer::class)
     val dateStart: ZonedDateTime,
     @Serializable(with = ZonedDateTimeSerializer::class)
-    val dateEnd: ZonedDateTime
+    val dateEnd: ZonedDateTime,
+    val priceOverride: Price?
 )
 
 @JvmInline
@@ -28,7 +30,8 @@ data class CreateShowtimeRequest(
     @Serializable(with = ZonedDateTimeSerializer::class)
     val dateStart: ZonedDateTime,
     @Serializable(with = ZonedDateTimeSerializer::class)
-    val dateEnd: ZonedDateTime
+    val dateEnd: ZonedDateTime,
+    val priceOverride: Price?
 )
 
 @Serializable
@@ -39,5 +42,6 @@ data class ShowtimeResponse(
     @Serializable(with = ZonedDateTimeSerializer::class)
     val dateStart: ZonedDateTime,
     @Serializable(with = ZonedDateTimeSerializer::class)
-    val dateEnd: ZonedDateTime
+    val dateEnd: ZonedDateTime,
+    val priceOverride: Price?
 )

@@ -10,6 +10,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.coroutines.executeAsync
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
@@ -20,6 +21,7 @@ class OmdbHttpClient(
     @Value("\${omdb.baseUrl}")
     private val baseUrl: String,
     private val client: OkHttpClient,
+    @Qualifier(value = "omdbSerializer")
     private val serializer: Json
 ) {
 

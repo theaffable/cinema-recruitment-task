@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ErrorHandler {
 
     @ExceptionHandler
-    fun handleMovieNotFound(e: MovieNotFound): ResponseEntity<String> =
+    fun handleMovieNotFound(e: MovieNotFoundException): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
     @ExceptionHandler
-    fun handleCatalogEntryNotFound(e: CatalogEntryNotFound): ResponseEntity<String> =
+    fun handleCatalogEntryNotFound(e: CatalogEntryNotFoundException): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
     @ExceptionHandler
-    fun handleShowtimeNotFound(e: ShowtimeNotFound): ResponseEntity<String> =
+    fun handleShowtimeNotFound(e: ShowtimeNotFoundException): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
-    @ExceptionHandler
-    fun handleInvalidUuidFormat(e: InvalidUuidFormat): ResponseEntity<String> =
+    @ExceptionHandler(exception = [InvalidUuidFormatException::class, EmptyUpdateRequestException::class])
+    fun handleClientError(e: Exception): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.message)
-
 
     @ExceptionHandler
     fun handleHttpClientException(e: HttpClientException): ResponseEntity<String> {

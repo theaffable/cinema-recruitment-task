@@ -1,9 +1,9 @@
 package cinema.showtimes
 
-import cinema.errors.InvalidUuidFormat
+import cinema.errors.EmptyUpdateRequestException
+import cinema.extensions.parseAsUuid
 import cinema.movies.MovieId
 import java.time.ZonedDateTime
-import kotlin.uuid.Uuid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -41,14 +41,16 @@ class ShowtimeController(
         ).toResponse()
 
     @PatchMapping("/{showtime_id}")
-    fun update(@PathVariable("showtime_id") showtimeId: String, @RequestBody request: ModifyShowtimeRequest): ShowtimeResponse =
-        showtimeService.update(
+    fun update(@PathVariable("showtime_id") showtimeId: String, @RequestBody request: ModifyShowtimeRequest): ShowtimeResponse {
+        if (request.isEmpty()) throw EmptyUpdateRequestException()
+        return showtimeService.update(
             showtimeId = showtimeId.toShowtimeId(),
             movieCatalogId = request.movieCatalogId,
             dateTimeStart = request.dateStart,
             dateTimeEnd = request.dateEnd,
             priceOverride = request.priceOverride
         ).toResponse()
+    }
 
     @DeleteMapping("/{showtime_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -66,12 +68,9 @@ private fun Showtime.toResponse() = ShowtimeResponse(
     priceOverride = this.priceOverride
 )
 
-private fun String.toShowtimeId(): ShowtimeId = ShowtimeId(this.parseUuid())
 
-private fun String.parseUuid(): Uuid {
-    return try {
-        Uuid.parse(this)
-    } catch (e: IllegalArgumentException) {
-        throw InvalidUuidFormat(this)
-    }
-}
+
+private fun String.toShowtimeId(): ShowtimeId = ShowtimeId(this.parseAsUuid())
+
+private fun ModifyShowtimeRequest.isEmpty() =
+    listOf(this.movieCatalogId, this.dateStart, this.dateEnd, this.priceOverride).all { it == null }

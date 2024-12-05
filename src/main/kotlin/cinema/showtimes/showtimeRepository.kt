@@ -1,6 +1,6 @@
 package cinema.showtimes
 
-import cinema.errors.ShowtimeNotFound
+import cinema.errors.ShowtimeNotFoundException
 import cinema.movies.Movie
 import cinema.movies.MovieId
 import cinema.price.Price
@@ -66,7 +66,7 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
         dateTimeEnd: ZonedDateTime?,
         priceOverride: Price?
     ): Showtime {
-        val showtime = findBy(showtimeId) ?: throw ShowtimeNotFound(showtimeId)
+        val showtime = findBy(showtimeId) ?: throw ShowtimeNotFoundException(showtimeId)
         val updated = showtime.copy(
             movie = movie ?: showtime.movie,
             dateStart = dateTimeStart ?: showtime.dateStart,
@@ -79,6 +79,6 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
 
     override fun delete(showtimeId: ShowtimeId) {
         val wasRemoved = showtimes.removeIf { showtimeId == it.id }
-        if (!wasRemoved) throw ShowtimeNotFound(showtimeId)
+        if (!wasRemoved) throw ShowtimeNotFoundException(showtimeId)
     }
 }

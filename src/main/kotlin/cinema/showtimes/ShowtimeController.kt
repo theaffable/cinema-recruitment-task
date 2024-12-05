@@ -1,8 +1,11 @@
 package cinema.showtimes
 
+import cinema.movies.MovieId
+import java.time.ZonedDateTime
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -11,7 +14,12 @@ class ShowtimeController(
 ) {
 
     @GetMapping("/showtimes")
-    fun getAll(): List<ShowtimeResponse> = showtimeService.getAll().map { it.toResponse() }
+    fun getAll(
+        @RequestParam(name = "movie_id") movieId: MovieId?,
+        @RequestParam(name = "date_start_gte") dateStartGte: ZonedDateTime?,
+        @RequestParam(name = "date_start_lte") dateStartLte: ZonedDateTime?
+    ): List<ShowtimeResponse> =
+        showtimeService.findBy(movieId = movieId, startsBefore = dateStartLte, startsAfter = dateStartGte).map { it.toResponse() }
 
     @PostMapping("/showtimes")
     fun create(@RequestBody request: CreateShowtimeRequest): ShowtimeResponse =

@@ -193,8 +193,8 @@ definitions:
         description: "Movie title"
         type: string
       price:
-        type: string
-        format: decimal
+        type: object
+        $ref: "#/definitions/Price"
 
   Price:
     type: object

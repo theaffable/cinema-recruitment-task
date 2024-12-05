@@ -18,7 +18,8 @@ class ShowtimeController(
         showtimeService.create(
             movieCatalogId = request.movieCatalogId,
             dateTimeStart = request.dateStart,
-            dateTimeEnd = request.dateEnd
+            dateTimeEnd = request.dateEnd,
+            priceOverride = request.priceOverride
         ).toResponse()
 }
 
@@ -27,5 +28,6 @@ private fun Showtime.toResponse() = ShowtimeResponse(
     movieId = this.movie.id,
     title = this.movie.title,
     dateStart = this.dateStart,
-    dateEnd = this.dateEnd
+    dateEnd = this.dateEnd,
+    priceOverride = this.priceOverride
 )

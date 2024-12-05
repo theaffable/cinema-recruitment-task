@@ -2,46 +2,82 @@
   {
     "id": "d3de11c1-922d-4097-92b0-c98640ff57dd",
     "title": "The Fast and the Furious",
-    "movieId": "tt0232500"
+    "movie_id": "tt0232500",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "2917f760-75f0-42c8-840f-5a411166b020",
     "title": "2 Fast 2 Furious",
-    "movieId": "tt0322259"
+    "movie_id": "tt0322259",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "e5a1322d-6621-4bc7-806b-2070156f6b15",
     "title": "The Fast and the Furious: Tokyo Drift",
-    "movieId": "tt0463985"
+    "movie_id": "tt0463985",
+    "price": {
+      "amount": "9.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "7157cb5d-667d-41a6-9656-fe56a1111d06",
     "title": "Fast & Furious",
-    "movieId": "tt1013752"
+    "movie_id": "tt1013752",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "e57542e8-7819-47f1-bcb0-7efb137963d3",
     "title": "Fast Five",
-    "movieId": "tt1596343"
+    "movie_id": "tt1596343",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "e21a0545-90e6-45dd-a9d8-9b5a358e7c95",
     "title": "Fast & Furious 6",
-    "movieId": "tt1905041"
+    "movie_id": "tt1905041",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "fcdaa315-4854-4206-a8dd-2ed841ee5357",
     "title": "Furious 7",
-    "movieId": "tt2820852"
+    "movie_id": "tt2820852",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "3a29cdea-fe2a-40d7-8f3c-8b2644edbabd",
     "title": "The Fate of the Furious",
-    "movieId": "tt4630562"
+    "movie_id": "tt4630562",
+    "price": {
+      "amount": "7.50",
+      "currency": "USD"
+    }
   },
   {
     "id": "a0bdc644-8848-463d-a1aa-cde0519dab5d",
     "title": "F9: The Fast Saga",
-    "movieId": "tt5433138"
+    "movie_id": "tt5433138",
+    "price": {
+      "amount": "10.50",
+      "currency": "USD"
+    }
   }
 ]

@@ -14,7 +14,7 @@ interface ShowtimeRepository {
 
 @Repository
 class DatabaseShowtimeRepository(): ShowtimeRepository {
-    private val showtimes = mutableListOf<Showtime>(
+    private val showtimes = mutableListOf(
         Showtime(
             id = ShowtimeId(Uuid.random()),
             movie = Movie(
@@ -31,7 +31,8 @@ class DatabaseShowtimeRepository(): ShowtimeRepository {
                 languages = listOf()
             ),
             dateStart = ZonedDateTime.now(),
-            dateEnd = ZonedDateTime.now().plusHours(2)
+            dateEnd = ZonedDateTime.now().plusHours(2),
+            priceOverride = null
         )
     )
 

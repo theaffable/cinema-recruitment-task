@@ -10,7 +10,7 @@ If you're using bash simply run `export OMDB_API_KEY=<YOUR_API_KEY>`
 TODO: add docker compose command to run the app & db
 
 ### API documentation
-Full API documentation is located in `/docs/api.yml`. You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
+Full API documentation is located in [/docs/api.yml](https://raw.githubusercontent.com/theaffable/cinema/refs/heads/main/docs/api.yaml). You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
 
 ### Q&A
 **Q:** requirements state that I should use OpenAPI 2.0, but it's an old standard - should I use 3.0 instead?\

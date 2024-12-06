@@ -7,7 +7,8 @@ If you're using bash simply run `export OMDB_API_KEY=<YOUR_API_KEY>`
 
 
 ### Running the project
-TODO: add docker compose command to run the app & db
+Easiest way is to run it using docker:
+`docker compose up`
 
 ### API documentation
 Full API documentation is located in [/docs/api.yml](https://raw.githubusercontent.com/theaffable/cinema/refs/heads/main/docs/api.yaml). You can use [Swagger Editor](https://editor-next.swagger.io/) to view it

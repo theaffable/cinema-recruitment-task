@@ -1,6 +1,12 @@
 spring:
   application:
     name: Fast&Furious Cinema
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${SPRING_DATASOURCE_USERNAME:cinema}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+
 server:
   servlet:
     contextPath: /api

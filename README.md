@@ -7,8 +7,12 @@ If you're using bash simply run `export OMDB_API_KEY=<YOUR_API_KEY>`
 
 
 ### Running the project
-Easiest way is to run it using docker:
+You can use docker compose to start both the application and the database:
 `docker compose up`
+
+If you want to run the app separately (i.e. inside IntelliJ) add this env variable to your run configuration:
+`SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/cinema`
+By default, the application points to a database running in docker, that's why we have to use localhost here
 
 ### API documentation
 Full API documentation is located in [/docs/api.yml](https://raw.githubusercontent.com/theaffable/cinema/refs/heads/main/docs/api.yaml). You can use [Swagger Editor](https://editor-next.swagger.io/) to view it

@@ -24,3 +24,10 @@ CREATE TABLE IF NOT EXISTS showtimes (
     price_override_currency VARCHAR(32) NULL);
 CREATE INDEX showtimes_movie_id ON showtimes (movie_id);
 
+CREATE TABLE IF NOT EXISTS ratings (
+    username VARCHAR(128),
+    catalog_entry_id uuid,
+    rating DECIMAL(3, 2) NOT NULL,
+    CONSTRAINT pk_ratings PRIMARY KEY (username, catalog_entry_id));
+CREATE INDEX ratings_catalog_entry_id ON ratings (catalog_entry_id);
+

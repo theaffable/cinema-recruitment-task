@@ -1,7 +1,9 @@
 package cinema.catalog
 
 import cinema.movies.MovieId
+import cinema.serializers.BigDecimalSerializer
 import cinema.serializers.SerializableUuid
+import java.math.BigDecimal
 import kotlin.uuid.toKotlinUuid
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.dao.id.UUIDTable
@@ -19,6 +21,17 @@ data class MovieCatalogEntry(
     val price: Price,
     val rating: Rating
 )
+
+@Serializable
+data class Price(
+    @Serializable(with = BigDecimalSerializer::class)
+    val amount: BigDecimal,
+    val currency: Currency
+)
+
+enum class Currency {
+    USD, EUR
+}
 
 object MovieCatalogEntriesTable: UUIDTable("catalog") {
     val movieId = varchar("movie_id", length = 128).index()

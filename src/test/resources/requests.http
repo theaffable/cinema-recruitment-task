@@ -1,0 +1,68 @@
+### Get movie details
+// @no-log
+GET http://localhost:8080/api/movies/tt1596343
+
+
+### Get showtimes
+// @no-log
+GET http://localhost:8080/api/showtimes
+
+
+### Get showtimes for movie
+// @no-log
+GET http://localhost:8080/api/showtimes?movie_id=tt0232500
+
+### Get showtimes after 2024-12-04T17:00:00
+// @no-log
+GET http://localhost:8080/api/showtimes?date_start_gte=2024-12-04T17%3A00%3A50%2B01%3A00%5BEurope%2FWarsaw%5D
+
+
+### Create showtime
+// @no-log
+POST http://localhost:8080/api/showtimes
+Content-Type: application/json
+Authorization: Basic admin password
+
+{
+  "movie_catalog_id": "d3de11c1-922d-4097-92b0-c98640ff57dd",
+  "date_start": "2024-12-04T16:04:59.129737+01:00[Europe/Warsaw]",
+  "date_end": "2024-12-04T18:04:59.129745+01:00[Europe/Warsaw]",
+  "price_override": {
+    "amount": "5.50",
+    "currency": "USD"
+  }
+}
+
+### Update showtime
+// @no-log
+PATCH http://localhost:8080/api/showtimes/7f5595cc-17f7-41c2-a0ed-a3bf76bee391
+Content-Type: application/json
+Authorization: Basic admin password
+
+{
+  "price_override": {
+    "amount": "10.50",
+    "currency": "USD"
+  }
+}
+
+### Delete showtime
+// @no-log
+DELETE http://localhost:8080/api/showtimes/7f5595cc-17f7-41c2-a0ed-a3bf76bee391
+Authorization: Basic admin password
+
+### Get all catalog entries
+// @no-log
+GET http://localhost:8080/api/catalog
+
+
+### Create movie rating
+// @no-log
+POST http://localhost:8080/api/catalog/d3de11c1-922d-4097-92b0-c98640ff57dd/rating
+Content-Type: application/json
+Authorization: Basic user1 password
+
+{
+  "rating": "5.0"
+}
+

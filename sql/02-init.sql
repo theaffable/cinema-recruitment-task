@@ -1,4 +1,4 @@
-CALL add_catalog_entry('d3de11c1-922d-4097-92b0-c98640ff57dd', 'The Fast and the Furious', 'tt0232500', 7.50, 'USD', 5.00, 1);
+CALL add_catalog_entry('d3de11c1-922d-4097-92b0-c98640ff57dd', 'The Fast and the Furious', 'tt0232500', 7.50, 'USD', 5.00, 0);
 CALL add_catalog_entry('2917f760-75f0-42c8-840f-5a411166b020', '2 Fast 2 Furious', 'tt0322259', 7.50, 'USD', 4.5, 100);
 CALL add_catalog_entry('e5a1322d-6621-4bc7-806b-2070156f6b15', 'The Fast and the Furious: Tokyo Drift', 'tt0463985', 9.50, 'USD', 4.5, 100);
 CALL add_catalog_entry('7157cb5d-667d-41a6-9656-fe56a1111d06', 'Fast & Furious', 'tt1013752', 7.50, 'USD', 4.5, 100);

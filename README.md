@@ -12,7 +12,7 @@ You can use docker compose to start both the application and the database:
 
 If you want to run the app separately (i.e. inside IntelliJ) add this env variable to your run configuration:
 `SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/cinema`
-By default, the application points to a database running in docker, that's why we have to use localhost here
+The database might still be running inside a docker container, but the app itself is now launched outside of docker compose network - that's why we point it towards localhost.
 
 ### API documentation
 Full API documentation is located in [/docs/api.yml](https://raw.githubusercontent.com/theaffable/cinema/refs/heads/main/docs/api.yaml). You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
@@ -48,6 +48,6 @@ After some consideration I decided to go with Basic Auth since I can implement i
 
 ### Ideas & what's next
 - add showtime booking
-- add movie description full text filtering
+- add movie description/actors/directors full text filtering
 - add movie sorting by rating/imdb_rating
 - use Flyway for migration management

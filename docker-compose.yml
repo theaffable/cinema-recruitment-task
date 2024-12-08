@@ -23,6 +23,7 @@ services:
       - POSTGRES_DB=cinema
     volumes:
       - pg-data:/var/lib/postgresql/data
+      - ./sql/:/docker-entrypoint-initdb.d/
 
 volumes:
   pg-data:

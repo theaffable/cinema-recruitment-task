@@ -46,7 +46,8 @@ After some consideration I decided to go with Basic Auth since I can implement i
 **Q:** How do I make sure that movie reviews don't get flooded with artificial ratings?\
 **A:** The plan is to allow only one vote per user & movie
 
-### Ideas
+### Ideas & what's next
 - add showtime booking
 - add movie description full text filtering
 - add movie sorting by rating/imdb_rating
+- use Flyway for migration management

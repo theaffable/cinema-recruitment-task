@@ -25,6 +25,7 @@ resilience4j = { module = "io.github.resilience4j:resilience4j-spring-boot3", ve
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-coroutines = { module = "com.squareup.okhttp3:okhttp-coroutines", version.ref = "okhttp-coroutines" }
 exposed-spring-boot-starter = { module = "org.jetbrains.exposed:exposed-spring-boot-starter", version.ref = "exposed"}
+exposed-java-time = { module = "org.jetbrains.exposed:exposed-java-time", version.ref = "exposed" }
 postgres-driver = { module = "org.postgresql:postgresql", version.ref = "postgres-driver" }
 
 # test only libs
@@ -41,5 +42,5 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 [bundles]
 kotlin = ["kotlinx-serialization", "kotlin-reflect", "kotlin-coroutines"]
 spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop", "spring-boot-starter-security"]
-orm = ["exposed-spring-boot-starter", "postgres-driver"]
+orm = ["exposed-spring-boot-starter", "postgres-driver", "exposed-java-time"]
 test = ["junit", "spring-boot-starter-test"]

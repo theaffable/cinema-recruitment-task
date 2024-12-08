@@ -1,7 +1,6 @@
 package cinema.showtimes
 
 import cinema.errors.CatalogEntryNotFoundException
-import cinema.errors.MovieNotFoundException
 import cinema.errors.ShowtimeNotFoundException
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.MovieCatalogService
@@ -11,6 +10,7 @@ import cinema.catalog.Price
 import java.time.ZonedDateTime
 import kotlin.uuid.Uuid
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 interface ShowtimeService {
     fun findBy(
@@ -38,6 +38,7 @@ interface ShowtimeService {
 }
 
 @Service
+@Transactional
 class SimpleShowtimeService(
     private val showtimeRepository: ShowtimeRepository,
     private val movieCatalogService: MovieCatalogService,
@@ -61,10 +62,10 @@ class SimpleShowtimeService(
         priceOverride: Price?
     ): Showtime {
         val catalogEntry = movieCatalogService.findById(movieCatalogId) ?: throw CatalogEntryNotFoundException(movieCatalogId)
-        val movie = movieService.getMovieDetails(catalogEntry.movieId) ?: throw MovieNotFoundException(catalogEntry.movieId)
         return Showtime(
             id = ShowtimeId(Uuid.random()),
-            movie = movie,
+            movieId = catalogEntry.movieId,
+            movieTitle = catalogEntry.title,
             dateStart = dateTimeStart,
             dateEnd = dateTimeEnd,
             priceOverride = priceOverride
@@ -79,12 +80,11 @@ class SimpleShowtimeService(
         priceOverride: Price?
     ): Showtime {
         val showtime = showtimeRepository.findBy(showtimeId) ?: throw ShowtimeNotFoundException(showtimeId)
-        val movie = movieCatalogId
-            ?. let { movieCatalogService.findById(it) }
-            ?. let { movieService.getMovieDetails(it.movieId) }
+        val catalogEntry = movieCatalogId?.let { movieCatalogService.findById(it) }
         return showtimeRepository.update(
             showtimeId = showtimeId,
-            movie = movie ?: showtime.movie,
+            movieId = catalogEntry?.movieId ?: showtime.movieId,
+            movieTitle = catalogEntry?.title ?: showtime.movieTitle,
             dateTimeStart = dateTimeStart ?: showtime.dateStart,
             dateTimeEnd = dateTimeEnd ?: showtime.dateEnd,
             priceOverride = priceOverride ?: showtime.priceOverride

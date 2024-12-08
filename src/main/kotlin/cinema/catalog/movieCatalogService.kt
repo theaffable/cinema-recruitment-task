@@ -3,6 +3,7 @@ package cinema.catalog
 import cinema.movies.MovieId
 import java.math.BigDecimal
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 interface MovieCatalogService {
     fun findAll(): List<MovieCatalogEntry>
@@ -13,6 +14,7 @@ interface MovieCatalogService {
 
 @Service
 class SimpleMovieCatalogService(val movieCatalogRepository: MovieCatalogRepository): MovieCatalogService {
+    @Transactional
     override fun findAll(): List<MovieCatalogEntry> = movieCatalogRepository.findAll()
 
     override fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry? = movieCatalogRepository.findById(movieCatalogId)

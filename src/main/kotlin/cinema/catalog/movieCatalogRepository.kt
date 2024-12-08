@@ -1,12 +1,10 @@
 package cinema.catalog
 
-import cinema.errors.CatalogEntryNotFoundException
 import cinema.movies.MovieId
 import java.math.BigDecimal
-import java.nio.charset.Charset
-import kotlinx.serialization.json.Json
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.core.io.Resource
+import kotlin.uuid.toJavaUuid
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.springframework.stereotype.Repository
 
 interface MovieCatalogRepository {
@@ -14,37 +12,39 @@ interface MovieCatalogRepository {
     fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry?
     fun contains(movieId: MovieId): Boolean
     fun updateRating(movieCatalogId: MovieCatalogId, rating: BigDecimal): Rating
+    fun saveAll(entries: Collection<MovieCatalogEntry>)
 }
 
 @Repository
-class MovieCatalogFileBasedRepository(
-    @Value("classpath:movie-catalog.json")
-    private val movieCatalogResource: Resource,
-    private val serializer: Json
-) : MovieCatalogRepository {
+class MovieCatalogDbRepository: MovieCatalogRepository {
+    override fun findAll(): List<MovieCatalogEntry> = MovieCatalogEntriesTable.selectAll().map { it.toMovieCatalogEntry() }
 
-    private val movieCatalogEntries = loadCatalogEntries()
+    override fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry? =
+        MovieCatalogEntriesTable.selectAll()
+            .where { MovieCatalogEntriesTable.id eq movieCatalogId.value.toJavaUuid() }
+            .map { it.toMovieCatalogEntry() }
+            .firstOrNull()
 
-    private fun loadCatalogEntries(): Collection<MovieCatalogEntry> =
-        movieCatalogResource.getContentAsString(Charset.defaultCharset()).let { serializer.decodeFromString(it) }
-
-    override fun findAll(): List<MovieCatalogEntry> = movieCatalogEntries.toList()
-
-    override fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry? = movieCatalogEntries.find { it.id == movieCatalogId }
-
-    override fun contains(movieId: MovieId): Boolean = movieCatalogEntries.any{ it.movieId == movieId }
+    override fun contains(movieId: MovieId): Boolean =
+        MovieCatalogEntriesTable.selectAll()
+            .where { MovieCatalogEntriesTable.movieId eq movieId.value }
+            .any()
 
     override fun updateRating(movieCatalogId: MovieCatalogId, rating: BigDecimal): Rating {
-        val currentRating = findById(movieCatalogId)?.rating ?: throw CatalogEntryNotFoundException(movieCatalogId)
-        if (currentRating.count == 0) {
-            currentRating.count = 1;
-            currentRating.average = rating
-        } else {
-            val count = currentRating.count.toBigDecimal()
-            val newAvg = (currentRating.average * count + rating) / count.inc()
-            currentRating.count += 1
-            currentRating.average = newAvg
+        TODO("Not yet implemented")
+    }
+
+    override fun saveAll(entries: Collection<MovieCatalogEntry>) {
+        entries.forEach { entry ->
+            MovieCatalogEntriesTable.insert {
+                it[id] = entry.id.value.toJavaUuid()
+                it[movieId] = entry.movieId.value
+                it[title] = entry.title
+                it[priceAmount] = entry.price.amount
+                it[priceCurrency] = entry.price.currency
+                it[ratingAvg] = entry.rating.average
+                it[ratingCount] = entry.rating.count
+            }
         }
-        return currentRating
     }
 }

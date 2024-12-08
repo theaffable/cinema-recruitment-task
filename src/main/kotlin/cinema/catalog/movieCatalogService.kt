@@ -9,18 +9,26 @@ interface MovieCatalogService {
     fun findAll(): List<MovieCatalogEntry>
     fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry?
     fun isInCatalog(movieId: MovieId): Boolean
-    fun rate(movieCatalogId: MovieCatalogId, rating: BigDecimal): Rating
+    fun createOrUpdateRating(movieCatalogId: MovieCatalogId, user: String, rating: BigDecimal): Rating
 }
 
 @Service
+@Transactional
 class SimpleMovieCatalogService(val movieCatalogRepository: MovieCatalogRepository): MovieCatalogService {
-    @Transactional
     override fun findAll(): List<MovieCatalogEntry> = movieCatalogRepository.findAll()
 
     override fun findById(movieCatalogId: MovieCatalogId): MovieCatalogEntry? = movieCatalogRepository.findById(movieCatalogId)
 
     override fun isInCatalog(movieId: MovieId) = movieCatalogRepository.contains(movieId)
 
-    override fun rate(movieCatalogId: MovieCatalogId, rating: BigDecimal): Rating =
-        movieCatalogRepository.updateRating(movieCatalogId, rating)
+    override fun createOrUpdateRating(movieCatalogId: MovieCatalogId, user: String, rating: BigDecimal): Rating {
+        movieCatalogRepository.upsert(movieCatalogId, user, rating)
+        return movieCatalogRepository.getAverageRating(movieCatalogId).also {
+            movieCatalogRepository.updateRating(
+                movieCatalogId = movieCatalogId,
+                newRating = it.average,
+                newCount = it.count
+            )
+        }
+    }
 }

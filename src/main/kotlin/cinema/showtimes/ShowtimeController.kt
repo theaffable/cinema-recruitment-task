@@ -61,8 +61,8 @@ class ShowtimeController(
 
 private fun Showtime.toResponse() = ShowtimeResponse(
     showtimeId = this.id,
-    movieId = this.movie.id,
-    title = this.movie.title,
+    movieId = this.movieId,
+    title = this.movieTitle,
     dateStart = this.dateStart,
     dateEnd = this.dateEnd,
     priceOverride = this.priceOverride

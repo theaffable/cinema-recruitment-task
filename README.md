@@ -17,6 +17,9 @@ The database might still be running inside a docker container, but the app itsel
 ### API documentation
 Full API documentation is located in [/docs/api.yml](https://raw.githubusercontent.com/theaffable/cinema/refs/heads/main/docs/api.yaml). You can use [Swagger Editor](https://editor-next.swagger.io/) to view it
 
+### Tests
+I've used a http client to test API functionality, the requests file can be found [here](https://github.com/theaffable/cinema/blob/main/src/test/resources/requests.http)
+
 ### Q&A
 **Q:** requirements state that I should use OpenAPI 2.0, but it's an old standard - should I use 3.0 instead?\
 **A**: at first glance 2.0 seems to be good enough so I'll stick with that, but if needed I'll upgrade to 3.0

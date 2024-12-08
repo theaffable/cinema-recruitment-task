@@ -9,3 +9,20 @@ services:
       - "8080:8080"
     environment:
       - OMDB_API_KEY=${OMDB_API_KEY}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://cinema-db:5432/cinema
+      - SPRING_DATASOURCE_USERNAME=cinema
+      - SPRING_DATASOURCE_PASSWORD=${CINEMA_DB_PASSWORD:-password}
+  db:
+    image: postgres:17-alpine
+    container_name: cinema-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=${CINEMA_DB_PASSWORD:-password}
+      - POSTGRES_USER=cinema
+      - POSTGRES_DB=cinema
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  pg-data:

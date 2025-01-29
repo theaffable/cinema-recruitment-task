@@ -19,12 +19,13 @@ dependencies {
     implementation(libs.resilience4j)
     implementation(libs.bundles.orm)
     testImplementation(kotlin("test"))
-    testImplementation(libs.bundles.test)
+    testImplementation(libs.bundles.integration.test)
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
     compilerOptions {

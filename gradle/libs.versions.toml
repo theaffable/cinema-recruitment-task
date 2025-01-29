@@ -6,6 +6,8 @@ coroutines = "1.9.0"
 spring-boot = "3.4.0"
 spring-dependency-management = "1.1.6"
 junit = "2.1.0"
+kotest = "6.0.0.M1"
+mockk = "1.13.16"
 okhttp = "4.12.0"
 okhttp-coroutines = "5.0.0-alpha.14"
 resilience4j = "2.2.0"
@@ -31,6 +33,9 @@ postgres-driver = { module = "org.postgresql:postgresql", version.ref = "postgre
 # test only libs
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "junit" }
+kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -41,6 +46,7 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 
 [bundles]
 kotlin = ["kotlinx-serialization", "kotlin-reflect", "kotlin-coroutines"]
-spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop", "spring-boot-starter-security"]
+spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop"]
 orm = ["exposed-spring-boot-starter", "postgres-driver", "exposed-java-time"]
-test = ["junit", "spring-boot-starter-test"]
+integration-test = ["junit", "spring-boot-starter-test", "mockk"]
+kotest = ["kotest-runner", "kotest-assertions"]

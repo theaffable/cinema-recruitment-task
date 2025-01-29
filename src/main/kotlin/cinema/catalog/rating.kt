@@ -3,7 +3,6 @@ package cinema.catalog
 import cinema.serializers.BigDecimalSerializer
 import java.math.BigDecimal
 import kotlinx.serialization.Serializable
-import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 
 @Serializable

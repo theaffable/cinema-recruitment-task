@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
-@ImportAutoConfiguration(
-    value = [ExposedAutoConfiguration::class],
-    exclude = [DataSourceTransactionManagerAutoConfiguration::class]
-)
+// @SpringBootApplication
+// @ImportAutoConfiguration(
+//     value = [ExposedAutoConfiguration::class],
+//     exclude = [DataSourceTransactionManagerAutoConfiguration::class]
+// )
 class Application
 
 fun main(args: Array<String>) {

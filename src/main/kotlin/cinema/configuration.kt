@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.http.converter.json.KotlinSerializationJsonHttpMessageConverter
 
-@Configuration
+// @Configuration
 class Configuration(
     @Value("\${omdb.cacheDir}")
     private val cacheDir: String

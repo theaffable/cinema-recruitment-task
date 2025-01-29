@@ -1,7 +1,6 @@
 package cinema.http.controllers
 
 import cinema.api.GetCatalogEntries
-import cinema.catalog.MovieCatalogEntry
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -13,7 +12,7 @@ class MovieCatalogController(
 ) {
 
     @GetMapping
-    fun getAll(): Collection<MovieCatalogEntry> = getCatalogEntries.all()
+    fun getAll(): Collection<MovieCatalogEntryResource> = getCatalogEntries.all().map { it.toResource() }
 
     // @PostMapping("/{movie_catalog_id}/rating")
     // @ResponseStatus(HttpStatus.CREATED)

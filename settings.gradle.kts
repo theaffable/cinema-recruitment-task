@@ -5,3 +5,4 @@ rootProject.name = "cinema"
 include("domain")
 include("secondary-adapters")
 include("primary-adapters")
+include("application")

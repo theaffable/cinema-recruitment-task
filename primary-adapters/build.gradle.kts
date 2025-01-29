@@ -22,6 +22,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
+    compilerOptions {
+        freeCompilerArgs.addAll(
+            // enable kotlin built-in Uuid type
+            "-opt-in=kotlin.uuid.ExperimentalUuidApi"
+        )
+    }
 }

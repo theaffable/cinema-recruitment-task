@@ -1,4 +1,4 @@
-package cinema.http
+package cinema
 
 import ddd.DomainService
 import org.springframework.context.annotation.ComponentScan

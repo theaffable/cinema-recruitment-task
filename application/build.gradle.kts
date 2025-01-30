@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
 }
@@ -12,6 +13,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":primary-adapters"))
     implementation(project(":secondary-adapters"))
+    implementation(libs.bundles.kotlin)
     implementation(platform(libs.spring.boot.bom))
     implementation(libs.bundles.spring)
     implementation(libs.bundles.exposed.spring)

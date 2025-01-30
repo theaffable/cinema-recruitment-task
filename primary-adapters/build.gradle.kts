@@ -14,9 +14,14 @@ dependencies {
     implementation(project(":domain"))
     implementation(platform(libs.spring.boot.bom))
     implementation(libs.bundles.spring)
+    implementation(libs.bundles.kotlin)
     testImplementation(kotlin("test"))
     testImplementation(libs.bundles.kotest)
+    testImplementation(libs.spring.webflux)
     testImplementation(libs.bundles.integration.test)
+    testImplementation(libs.kotest.extensions.spring) {
+        exclude(libs.mockito.core.get().toString())
+    }
 }
 
 tasks.test {

@@ -6,15 +6,15 @@ data class MovieCatalogEntryResource(
     val id: String,
     val movieId: String,
     val title: String,
-    val price: PriceResource,
-    val rating: RatingResource
+    val price: PriceResponse,
+    val rating: RatingResponse
 )
 
-fun MovieCatalogEntry.toResource() = MovieCatalogEntryResource(
+fun MovieCatalogEntry.toResponse() = MovieCatalogEntryResource(
     id = id.value.toString(),
     movieId = movieId.value,
     title = title,
-    price = price.toResource(),
-    rating = rating.toResource()
+    price = price.toResponse(),
+    rating = rating.toResponse()
 
 )

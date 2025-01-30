@@ -4,9 +4,9 @@ import cinema.catalog.Currency
 import cinema.catalog.Price
 import java.math.BigDecimal
 
-data class PriceResource(
+data class PriceResponse(
     val amount: BigDecimal,
     val currency: Currency
 )
 
-fun Price.toResource() = PriceResource(amount = amount, currency = currency)
+fun Price.toResponse() = PriceResponse(amount = amount, currency = currency)

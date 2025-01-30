@@ -6,6 +6,7 @@ coroutines = "1.9.0"
 spring-boot = "3.4.0"
 spring-webflux = "7.0.0-M1"
 spring-dependency-management = "1.1.6"
+spring-security-test = "6.4.2"
 junit = "2.1.0"
 kotest = "5.9.1"
 kotest-extensions = "1.3.0"
@@ -44,6 +45,7 @@ kotest-assertions = { module = "io.kotest:kotest-assertions-core-jvm", version.r
 kotest-extensions-spring = { module = "io.kotest.extensions:kotest-extensions-spring", version.ref = "kotest-extensions" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 springmockk = { module = "com.ninja-squad:springmockk", version.ref = "springmockk" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -54,7 +56,7 @@ spring-dependency-management = { id = "io.spring.dependency-management", version
 
 [bundles]
 kotlin = ["kotlinx-serialization", "kotlin-reflect", "kotlin-coroutines"]
-spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop"]
+spring = ["spring-boot-starter-web", "spring-boot-bom", "spring-boot-actuator", "spring-boot-starter-aop", "spring-boot-starter-security"]
 exposed-spring = ["exposed-spring-boot-starter", "postgres-driver", "exposed-java-time"]
-integration-test = ["junit", "spring-boot-starter-test", "mockk", "springmockk"]
+integration-test = ["junit", "spring-boot-starter-test", "mockk", "springmockk", "spring-security-test"]
 kotest = ["kotest-runner", "kotest-assertions"]

@@ -9,7 +9,6 @@ import cinema.movie.MovieId
 import cinema.rating.Rating
 import cinema.spi.MovieCatalogInventory
 import com.ninjasquad.springmockk.MockkBean
-import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.mockk.every
 import java.math.BigDecimal
 import kotlin.uuid.Uuid
@@ -21,7 +20,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.body
-import org.springframework.test.web.reactive.server.returnResult
 import reactor.core.publisher.Mono
 
 @SpringBootTest(
@@ -53,15 +51,12 @@ class MovieCatalogControllerTest {
         )
         every { movieCatalogInventory.getAll() } returns catalogEntries
 
-        // when
+        // when && then
         val response = client.get().uri("/catalog").exchange()
             .expectStatus().isOk()
-            .returnResult<Collection<MovieCatalogEntryResource>>()
-            .responseBody
-            .blockLast()
-
-        // then
-        response.shouldNotBeEmpty()
+            .expectBody()
+            .jsonPath("$").isArray()
+            .jsonPath("$").isNotEmpty()
     }
 
     @Test
@@ -71,7 +66,7 @@ class MovieCatalogControllerTest {
         val catalogEntryId = Uuid.random()
         val requestBody = CreateRatingRequest(rating = BigDecimal.ONE)
 
-        // when and then
+        // when && then
         val response =
             client.post().uri("/catalog/$catalogEntryId/rating").body<CreateRatingRequest>(Mono.just(requestBody))
                 .exchange()

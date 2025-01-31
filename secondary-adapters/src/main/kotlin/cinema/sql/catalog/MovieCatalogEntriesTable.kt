@@ -5,7 +5,7 @@ import cinema.catalog.MovieCatalogEntry
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.Price
 import cinema.movie.MovieId
-import cinema.rating.Rating
+import cinema.rating.MovieRating
 import kotlin.uuid.toKotlinUuid
 import org.jetbrains.exposed.dao.id.UUIDTable
 import org.jetbrains.exposed.sql.ResultRow
@@ -28,7 +28,7 @@ fun ResultRow.toMovieCatalogEntry() =
             amount = this[MovieCatalogEntriesTable.priceAmount],
             currency = this[MovieCatalogEntriesTable.priceCurrency]
         ),
-        rating = Rating(
+        rating = MovieRating(
             average = this[MovieCatalogEntriesTable.ratingAvg],
             count = this[MovieCatalogEntriesTable.ratingCount]
         )

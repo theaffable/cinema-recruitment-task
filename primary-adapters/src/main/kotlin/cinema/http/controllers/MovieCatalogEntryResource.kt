@@ -7,7 +7,7 @@ data class MovieCatalogEntryResource(
     val movieId: String,
     val title: String,
     val price: PriceResponse,
-    val rating: RatingResponse
+    val rating: MovieRatingResponse
 )
 
 fun MovieCatalogEntry.toResponse() = MovieCatalogEntryResource(

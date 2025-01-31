@@ -1,14 +1,19 @@
 package cinema.http
 
 import ddd.DomainService
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNamingStrategy
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.FilterType
+import org.springframework.context.annotation.Primary
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
+import org.springframework.http.converter.json.KotlinSerializationJsonHttpMessageConverter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
@@ -35,6 +40,23 @@ fun main(args: Array<String>) {
     includeFilters = [ComponentScan.Filter(type = FilterType.ANNOTATION, classes = [DomainService::class])]
 )
 class TestDomainConfiguration
+
+@Configuration
+class SerializerConfiguration {
+    @OptIn(ExperimentalSerializationApi::class)
+    @Bean
+    @Primary
+    fun configureSnakeCaseSerializer() = Json {
+        prettyPrint = true
+        ignoreUnknownKeys = true
+        namingStrategy = JsonNamingStrategy.SnakeCase
+    }
+
+    @Bean
+    fun messageConverter(): KotlinSerializationJsonHttpMessageConverter {
+        return KotlinSerializationJsonHttpMessageConverter(configureSnakeCaseSerializer())
+    }
+}
 
 @Configuration
 @EnableWebSecurity

@@ -1,15 +1,34 @@
 package cinema.http.controllers
 
-import cinema.rating.Rating
-import java.math.BigDecimal
+import cinema.http.serializers.SerializableBigDecimal
+import cinema.rating.MovieRating
+import cinema.rating.UserRating
+import kotlinx.serialization.Serializable
 
-data class RatingResponse(
-    var average: BigDecimal,
+@Serializable
+data class MovieRatingResponse(
+    var average: SerializableBigDecimal,
     var count: Int
 )
 
-data class CreateRatingRequest(
-    val rating: BigDecimal
+@Serializable
+data class CreateOrUpdateRatingRequest(
+    val rating: SerializableBigDecimal
 )
 
-fun Rating.toResponse() = RatingResponse(average = this.average, count = this.count)
+@Serializable
+data class UserRatingResponse(
+
+    val rating: SerializableBigDecimal,
+    val newMovieRating: MovieRatingResponse
+)
+
+fun UserRating.toResponse() = UserRatingResponse(
+    rating = this.rating,
+    newMovieRating = this.newMovieRating.toResponse()
+)
+
+fun MovieRating.toResponse() = MovieRatingResponse(
+    average = this.average,
+    count = this.count
+)

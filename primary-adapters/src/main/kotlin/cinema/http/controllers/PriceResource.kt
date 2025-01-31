@@ -2,10 +2,12 @@ package cinema.http.controllers
 
 import cinema.catalog.Currency
 import cinema.catalog.Price
-import java.math.BigDecimal
+import cinema.http.serializers.SerializableBigDecimal
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PriceResponse(
-    val amount: BigDecimal,
+    val amount: SerializableBigDecimal,
     val currency: Currency
 )
 

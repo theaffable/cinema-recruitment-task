@@ -3,7 +3,7 @@ package cinema.catalog
 import java.math.BigDecimal
 import kotlin.uuid.Uuid
 import cinema.movie.MovieId
-import cinema.rating.Rating
+import cinema.rating.MovieRating
 
 @JvmInline
 value class MovieCatalogId constructor(val value: Uuid)
@@ -13,7 +13,7 @@ data class MovieCatalogEntry(
     val movieId: MovieId,
     val title: String,
     val price: Price,
-    val rating: Rating
+    val rating: MovieRating
 )
 
 data class Price(

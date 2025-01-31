@@ -7,7 +7,7 @@ import cinema.catalog.MovieCatalogEntry
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.Price
 import cinema.movie.MovieId
-import cinema.rating.Rating
+import cinema.rating.MovieRating
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import java.math.BigDecimal
@@ -22,7 +22,7 @@ class GetMovieCatalogTest : FunSpec({
                 movieId = MovieId(value = "te"),
                 title = "posuere",
                 price = Price(amount = BigDecimal.ONE, currency = Currency.USD),
-                rating = Rating(average = BigDecimal.ONE, count = 8366)
+                rating = MovieRating(average = BigDecimal.ONE, count = 8366)
             )
         )
         val getCatalogEntries: GetCatalogEntries = GetCatalogEntriesUseCase { movies }

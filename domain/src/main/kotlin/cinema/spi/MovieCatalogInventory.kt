@@ -2,6 +2,6 @@ package cinema.spi
 
 import cinema.catalog.MovieCatalogEntry
 
-interface MovieCatalogInventory {
+fun interface MovieCatalogInventory {
     fun getAll(): Collection<MovieCatalogEntry>
 }

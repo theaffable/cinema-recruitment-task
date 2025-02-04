@@ -1,13 +1,12 @@
 package cinema.http.controllers
 
+import cinema.Application
 import cinema.catalog.Currency
 import cinema.catalog.MovieCatalogEntry
 import cinema.catalog.MovieCatalogId
 import cinema.catalog.Price
-import cinema.http.TestApplication
 import cinema.movie.MovieId
 import cinema.rating.MovieRating
-import cinema.rating.UserRating
 import cinema.spi.MovieCatalogInventory
 import cinema.spi.RatingInventory
 import com.ninjasquad.springmockk.MockkBean
@@ -26,7 +25,7 @@ import org.springframework.test.web.reactive.server.body
 import reactor.core.publisher.Mono
 
 @SpringBootTest(
-    classes = [TestApplication::class],
+    classes = [Application::class],
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @AutoConfigureWebTestClient

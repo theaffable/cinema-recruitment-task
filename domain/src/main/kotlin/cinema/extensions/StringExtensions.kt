@@ -2,7 +2,6 @@ package cinema.extensions
 
 import cinema.catalog.MovieCatalogId
 import cinema.exceptions.InvalidUuidFormatException
-import kotlin.jvm.Throws
 import kotlin.uuid.Uuid
 
 @Throws(InvalidUuidFormatException::class)

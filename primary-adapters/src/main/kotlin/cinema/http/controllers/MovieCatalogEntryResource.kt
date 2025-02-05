@@ -2,7 +2,7 @@ package cinema.http.controllers
 
 import cinema.catalog.MovieCatalogEntry
 
-data class MovieCatalogEntryResource(
+data class MovieCatalogEntryResponse(
     val id: String,
     val movieId: String,
     val title: String,
@@ -10,7 +10,7 @@ data class MovieCatalogEntryResource(
     val rating: MovieRatingResponse
 )
 
-fun MovieCatalogEntry.toResponse() = MovieCatalogEntryResource(
+fun MovieCatalogEntry.toResponse() = MovieCatalogEntryResponse(
     id = id.value.toString(),
     movieId = movieId.value,
     title = title,

@@ -22,7 +22,7 @@ class MovieCatalogController(
 ) {
 
     @GetMapping
-    fun getAll(): Collection<MovieCatalogEntryResource> = getCatalogEntries.all().map { it.toResponse() }
+    fun getAll(): Collection<MovieCatalogEntryResponse> = getCatalogEntries.all().map { it.toResponse() }
 
     @PostMapping("/{movie_catalog_id}/rating")
     @ResponseStatus(HttpStatus.CREATED)

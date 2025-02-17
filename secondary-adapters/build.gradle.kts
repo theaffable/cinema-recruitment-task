@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 repositories {
@@ -8,7 +9,11 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(libs.bundles.kotlin)
     implementation(libs.exposed.core)
+    implementation(libs.okhttp.coroutines)
+    implementation(libs.okhttp)
+    implementation(libs.resilience4j)
     testImplementation(kotlin("test"))
 }
 

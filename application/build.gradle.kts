@@ -18,6 +18,7 @@ dependencies {
     implementation(platform(libs.spring.boot.bom))
     implementation(libs.bundles.spring)
     implementation(libs.bundles.exposed.spring)
+    implementation(libs.okhttp)
     testImplementation(kotlin("test"))
     testImplementation(libs.bundles.kotest)
     testImplementation(libs.spring.webflux)

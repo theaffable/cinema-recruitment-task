@@ -12,24 +12,24 @@ spring:
 server:
   servlet:
     contextPath: /api
-#omdb:
-#  apiKey: ${OMDB_API_KEY}
-#  baseUrl: http://www.omdbapi.com/
-#  cacheDir: cache/omdb
-#resilience4j:
-#  retry:
-#    instances:
-#      omdbApi:
-#        max-attempts: 3
-#        wait-duration: 1s
-#        exponential-backoff-multiplier: 2
-#  circuitbreaker:
-#    instances:
-#      omdbApi:
-#        register-health-indicator: true
-#        sliding-window-size: 10
-#        failure-rate-threshold: 50
-#        wait-duration-in-open-state: 5s
+omdb:
+  apiKey: ${OMDB_API_KEY:fake_key}
+  baseUrl: http://www.omdbapi.com/
+  cacheDir: cache/omdb
+resilience4j:
+  retry:
+    instances:
+      omdbApi:
+        max-attempts: 3
+        wait-duration: 1s
+        exponential-backoff-multiplier: 2
+  circuitbreaker:
+    instances:
+      omdbApi:
+        register-health-indicator: true
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 5s
 #logging:
 #  level:
 #    ROOT: DEBUG

@@ -1,6 +1,7 @@
 package cinema.http.controllers
 
 import cinema.api.GetMovieDetails
+import cinema.exceptions.MovieNotFoundException
 import cinema.movie.MovieId
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,6 +14,7 @@ class MovieController(
 
     @GetMapping("/movies/{movie_id}")
     fun getMovieDetails(@PathVariable("movie_id") movieId: String): MovieResponse {
-        return getMovieDetails.forMovie(MovieId(value = movieId)).toResponse()
+        val id = MovieId(value = movieId)
+        return getMovieDetails.forMovie(id)?.toResponse() ?: throw MovieNotFoundException(id)
     }
 }

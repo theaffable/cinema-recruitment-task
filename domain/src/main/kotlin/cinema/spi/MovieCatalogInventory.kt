@@ -1,7 +1,9 @@
 package cinema.spi
 
 import cinema.catalog.MovieCatalogEntry
+import cinema.catalog.MovieCatalogId
 
-fun interface MovieCatalogInventory {
+interface MovieCatalogInventory {
     fun getAll(): Collection<MovieCatalogEntry>
+    fun find(movieCatalogId: MovieCatalogId): MovieCatalogEntry?
 }

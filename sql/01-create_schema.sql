@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS showtimes (
     movie_title VARCHAR(128) NOT NULL,
     date_start TIMESTAMP WITH TIME ZONE NOT NULL,
     date_end TIMESTAMP WITH TIME ZONE NOT NULL,
-    price_override_amount DECIMAL(5, 2) NULL,
-    price_override_currency VARCHAR(32) NULL);
+    price_amount DECIMAL(5, 2) NULL,
+    price_currency VARCHAR(32) NULL);
 CREATE INDEX showtimes_movie_id ON showtimes (movie_id);
 
 CREATE TABLE IF NOT EXISTS ratings (

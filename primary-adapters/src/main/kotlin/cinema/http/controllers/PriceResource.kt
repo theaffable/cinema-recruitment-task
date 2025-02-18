@@ -11,4 +11,12 @@ data class PriceResponse(
     val currency: Currency
 )
 
+@Serializable
+data class PriceRequest(
+    val amount: SerializableBigDecimal,
+    val currency: Currency
+)
+
 fun Price.toResponse() = PriceResponse(amount = amount, currency = currency)
+
+fun PriceRequest.toDomain() = Price(amount = amount, currency = currency)

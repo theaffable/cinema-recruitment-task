@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(libs.bundles.kotlin)
     implementation(libs.exposed.core)
+    implementation(libs.exposed.java.time)
     implementation(libs.okhttp.coroutines)
     implementation(libs.okhttp)
     implementation(libs.resilience4j)

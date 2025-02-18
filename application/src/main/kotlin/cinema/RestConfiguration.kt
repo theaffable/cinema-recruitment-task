@@ -32,7 +32,7 @@ class RestConfiguration(
             .build()
 
     @Bean
-    fun configureOmdbHttpClient(@Value("apiKey") apiKey: String, @Value("baseUrl") baseUrl: String, client: OkHttpClient, @Qualifier("omdbSerializer") serializer: Json): OmdbHttpClient = OmdbHttpClient(
+    fun configureOmdbHttpClient(@Value("\${omdb.apiKey}") apiKey: String, @Value("\${omdb.baseUrl}") baseUrl: String, client: OkHttpClient, @Qualifier("omdbSerializer") serializer: Json): OmdbHttpClient = OmdbHttpClient(
         apiKey = apiKey,
         baseUrl = baseUrl,
         client = client,

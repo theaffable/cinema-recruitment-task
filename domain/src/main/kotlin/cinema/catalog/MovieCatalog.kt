@@ -6,7 +6,7 @@ import cinema.movie.MovieId
 import cinema.rating.MovieRating
 
 @JvmInline
-value class MovieCatalogId constructor(val value: Uuid)
+value class MovieCatalogId(val value: Uuid)
 
 data class MovieCatalogEntry(
     val id: MovieCatalogId,

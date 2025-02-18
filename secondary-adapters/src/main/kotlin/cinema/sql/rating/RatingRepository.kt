@@ -31,7 +31,6 @@ class RatingRepository : RatingInventory {
             // calculate new average & count
             val averageColumn = RatingTable.rating.avg().alias("avg")
             val countColumn = RatingTable.rating.count().alias("count")
-            // return
             RatingTable.select(averageColumn, countColumn).map {
                 MovieRating(
                     average = it[averageColumn] ?: BigDecimal.ZERO,

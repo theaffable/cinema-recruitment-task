@@ -31,11 +31,13 @@ class RatingRepository : RatingInventory {
             // calculate new average & count
             val averageColumn = RatingTable.rating.avg().alias("avg")
             val countColumn = RatingTable.rating.count().alias("count")
-            RatingTable.select(averageColumn, countColumn).map {
-                MovieRating(
-                    average = it[averageColumn] ?: BigDecimal.ZERO,
-                    count = it[countColumn].toInt()
-                )
+            RatingTable.select(averageColumn, countColumn)
+                .where { RatingTable.catalogEntryId eq movieCatalogId.value.toJavaUuid() }
+                .map {
+                    MovieRating(
+                        average = it[averageColumn] ?: BigDecimal.ZERO,
+                        count = it[countColumn].toInt()
+                    )
             }.first()
         }
     }

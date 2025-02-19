@@ -1,6 +1,5 @@
 package cinema.sql.showtime
 
-import cinema.catalog.MovieCatalogId
 import cinema.catalog.Price
 import cinema.movie.MovieId
 import cinema.showtime.Showtime
@@ -13,6 +12,7 @@ import kotlin.uuid.toJavaUuid
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertReturning
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -69,5 +69,11 @@ class ShowtimeRepository : ShowtimeInventory {
                 it[priceCurrency] = price.currency
             }
         }.single().toShowtime()
+    }
+
+    override fun delete(showtimeId: ShowtimeId) {
+        transaction {
+            ShowtimeTable.deleteWhere { ShowtimeTable.id eq showtimeId.value.toJavaUuid() }
+        }
     }
 }

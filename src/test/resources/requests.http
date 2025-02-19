@@ -47,7 +47,7 @@ Authorization: Basic admin password
 
 ### Delete showtime
 // @no-log
-DELETE http://localhost:8080/api/showtimes/7f5595cc-17f7-41c2-a0ed-a3bf76bee391
+DELETE http://localhost:8080/api/showtimes/da708559-0679-4cc9-aefe-5edd0c718d3d
 Authorization: Basic admin password
 
 ### Get all catalog entries

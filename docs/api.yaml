@@ -233,7 +233,7 @@ definitions:
       date_end:
         type: string
         format: date-time
-      price_override:
+      price:
         $ref: "#/definitions/Price"
     required:
       - id
@@ -254,7 +254,7 @@ definitions:
       date_end:
         type: string
         format: date-time
-      price_override:
+      price:
         $ref: "#/definitions/Price"
     required:
       - movie_catalog_id
@@ -274,7 +274,7 @@ definitions:
       date_end:
         type: string
         format: date-time
-      price_override:
+      price:
         $ref: "#/definitions/Price"
 
   MovieResponse:

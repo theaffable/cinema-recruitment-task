@@ -13,4 +13,6 @@ interface ShowtimeInventory {
         dateEnd: ZonedDateTime,
         price: Price
     ): Showtime
+
+    fun findAll(movieId: MovieId?, dateStartGte: ZonedDateTime?, dateStartLte: ZonedDateTime?): Collection<Showtime>
 }

@@ -16,7 +16,6 @@ GET http://localhost:8080/api/showtimes?movie_id=tt0232500
 // @no-log
 GET http://localhost:8080/api/showtimes?date_start_gte=2024-12-04T17%3A00%3A50%2B01%3A00%5BEurope%2FWarsaw%5D
 
-
 ### Create showtime
 // @no-log
 POST http://localhost:8080/api/showtimes
@@ -25,7 +24,7 @@ Authorization: Basic admin password
 
 {
   "movie_catalog_id": "d3de11c1-922d-4097-92b0-c98640ff57dd",
-  "date_start": "2024-12-04T16:04:59.129737+01:00[Europe/Warsaw]",
+  "date_start": "2024-12-04T17:04:59.129737+01:00[Europe/Warsaw]",
   "date_end": "2024-12-04T18:04:59.129745+01:00[Europe/Warsaw]",
   "price": {
     "amount": "5.50",

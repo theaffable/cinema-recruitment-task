@@ -1,6 +1,7 @@
 package cinema.http.controllers
 
 import cinema.api.CreateShowtime
+import cinema.api.DeleteShowtime
 import cinema.api.GetShowtimes
 import cinema.api.UpdateShowtime
 import cinema.exceptions.EmptyUpdateRequestException
@@ -9,6 +10,7 @@ import cinema.extensions.asShowtimeId
 import cinema.movie.MovieId
 import java.time.ZonedDateTime
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -24,7 +26,8 @@ import org.springframework.web.bind.annotation.RestController
 class ShowtimeController(
     private val createShowtime: CreateShowtime,
     private val getShowtimes: GetShowtimes,
-    private val updateShowtime: UpdateShowtime
+    private val updateShowtime: UpdateShowtime,
+    private val deleteShowtime: DeleteShowtime
 ) {
 
     @GetMapping
@@ -55,6 +58,12 @@ class ShowtimeController(
             dateTimeEnd = request.dateEnd,
             price = request.price?.toDomain()
         ).toResponse()
+    }
+
+    @DeleteMapping("/{showtime_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(@PathVariable("showtime_id") showtimeId: String) {
+        deleteShowtime.delete(showtimeId.asShowtimeId())
     }
 }
 

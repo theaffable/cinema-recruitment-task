@@ -1,6 +1,5 @@
 package cinema.spi
 
-import cinema.catalog.MovieCatalogId
 import cinema.catalog.Price
 import cinema.movie.MovieId
 import cinema.showtime.Showtime
@@ -30,4 +29,6 @@ interface ShowtimeInventory {
         dateTimeEnd: ZonedDateTime?,
         price: Price?
     ): Showtime
+
+    fun delete(showtimeId: ShowtimeId)
 }

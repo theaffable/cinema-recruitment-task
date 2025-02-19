@@ -13,8 +13,8 @@ class ShowtimeNotFoundException(showtimeId: ShowtimeId) : Exception("Showtime wi
 
 class HttpClientException(val statusCode: Int) : Exception()
 
-class InvalidUuidFormatException(private val providedId: String) : Exception("Invalid parameter format. Expected valid UUIDv4 but got $providedId")
+class InvalidUuidFormatException(providedId: String) : Exception("Invalid parameter format. Expected valid UUIDv4 but got $providedId")
 
 class EmptyUpdateRequestException() : Exception("At least on property needs to be modified")
 
-class RatingValueOutOfRangeException(private val actual: BigDecimal, val min: Int, val max: Int) : Exception("Rating value must be between $min and $max, was $actual")
+class RatingValueOutOfRangeException(actual: BigDecimal, min: Int, max: Int) : Exception("Rating value must be between $min and $max, was $actual")

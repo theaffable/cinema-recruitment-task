@@ -34,12 +34,12 @@ Authorization: Basic admin password
 
 ### Update showtime
 // @no-log
-PATCH http://localhost:8080/api/showtimes/7f5595cc-17f7-41c2-a0ed-a3bf76bee391
+PATCH http://localhost:8080/api/showtimes/da708559-0679-4cc9-aefe-5edd0c718d3d
 Content-Type: application/json
 Authorization: Basic admin password
 
 {
-  "price_override": {
+  "price": {
     "amount": "10.50",
     "currency": "USD"
   }

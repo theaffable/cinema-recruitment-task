@@ -1,5 +1,7 @@
 package cinema.http.controllers
 
+import cinema.catalog.MovieCatalogId
+import cinema.catalog.Price
 import cinema.http.serializers.ZonedDateTimeSerializer
 import cinema.showtime.Showtime
 import java.time.ZonedDateTime
@@ -11,6 +13,14 @@ data class CreateShowtimeRequest(
     @Serializable(with = ZonedDateTimeSerializer::class) val dateStart: ZonedDateTime,
     @Serializable(with = ZonedDateTimeSerializer::class) val dateEnd: ZonedDateTime,
     val price: PriceRequest?
+)
+
+@Serializable
+data class ModifyShowtimeRequest(
+    val movieCatalogId: String? = null,
+    @Serializable(with = ZonedDateTimeSerializer::class) val dateStart: ZonedDateTime? = null,
+    @Serializable(with = ZonedDateTimeSerializer::class) val dateEnd: ZonedDateTime? = null,
+    val price: PriceRequest? = null
 )
 
 @Serializable

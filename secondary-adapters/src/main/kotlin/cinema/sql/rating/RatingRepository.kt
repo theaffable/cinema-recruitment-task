@@ -26,7 +26,7 @@ class RatingRepository : RatingInventory {
         }
     }
 
-    override fun findRating(movieCatalogId: MovieCatalogId): MovieRating {
+    override fun calculateRatingForCatalogEntry(movieCatalogId: MovieCatalogId): MovieRating {
         return transaction {
             // calculate new average & count
             val averageColumn = RatingTable.rating.avg().alias("avg")

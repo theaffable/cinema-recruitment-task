@@ -4,13 +4,16 @@ FROM gradle:8.8-jdk21 as builder
 WORKDIR /app
 
 # Copy the project files
-COPY build.gradle.kts settings.gradle.kts gradle/ ./
+COPY settings.gradle.kts gradle/ ./
 COPY gradle/libs.versions.toml gradle/libs.versions.toml
 
 # Pre-download dependencies for caching
 RUN gradle dependencies --no-daemon || return 0
 
-COPY src ./src
+COPY application ./application
+COPY domain ./domain
+COPY primary-adapters ./primary-adapters
+COPY secondary-adapters ./secondary-adapters
 
 # Build the application
 RUN gradle build --no-daemon

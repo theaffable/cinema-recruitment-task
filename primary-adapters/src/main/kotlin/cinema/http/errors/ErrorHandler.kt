@@ -5,6 +5,7 @@ import cinema.exceptions.EmptyUpdateRequestException
 import cinema.exceptions.HttpClientException
 import cinema.exceptions.InvalidUuidFormatException
 import cinema.exceptions.MovieNotFoundException
+import cinema.exceptions.RatingValueOutOfRangeException
 import cinema.exceptions.ShowtimeNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,7 +27,7 @@ class ErrorHandler {
     fun handleShowtimeNotFound(e: ShowtimeNotFoundException): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
 
-    @ExceptionHandler(exception = [InvalidUuidFormatException::class, EmptyUpdateRequestException::class, /*RatingValueOutOfRangeException::class*/])
+    @ExceptionHandler(exception = [InvalidUuidFormatException::class, EmptyUpdateRequestException::class, RatingValueOutOfRangeException::class])
     fun handleClientError(e: Exception): ResponseEntity<String> =
         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.message)
 

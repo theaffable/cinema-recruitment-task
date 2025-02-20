@@ -6,5 +6,5 @@ import java.math.BigDecimal
 
 interface RatingInventory {
     fun createOrUpdateRating(username: String, movieCatalogId: MovieCatalogId, rating: BigDecimal)
-    fun findRating(movieCatalogId: MovieCatalogId): MovieRating
+    fun calculateRatingForCatalogEntry(movieCatalogId: MovieCatalogId): MovieRating
 }

@@ -13,7 +13,7 @@ server:
   servlet:
     contextPath: /api
 omdb:
-  apiKey: ${OMDB_API_KEY:fake_key}
+  apiKey: ${OMDB_API_KEY}
   baseUrl: http://www.omdbapi.com/
   cacheDir: cache/omdb
 resilience4j:

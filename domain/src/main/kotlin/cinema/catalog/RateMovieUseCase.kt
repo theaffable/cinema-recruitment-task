@@ -18,7 +18,7 @@ class RateMovieUseCase(
         ratingInventory.createOrUpdateRating(username, movieCatalogId, rating)
 
         // then the movie catalogue is updated with the new average
-        val newRating = ratingInventory.findRating(movieCatalogId)
+        val newRating = ratingInventory.calculateRatingForCatalogEntry(movieCatalogId)
         movieCatalogInventory.updateRating(movieCatalogId, newRating)
 
         return UserRating(

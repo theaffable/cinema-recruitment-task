@@ -23,7 +23,7 @@ class MovieCatalogRepository: MovieCatalogInventory {
             MovieCatalogEntriesTable.selectAll()
                 .where { MovieCatalogEntriesTable.id eq movieCatalogId.value.toJavaUuid() }
                 .map { it.toMovieCatalogEntry() }
-                .firstOrNull()
+                .single()
         }
     }
 

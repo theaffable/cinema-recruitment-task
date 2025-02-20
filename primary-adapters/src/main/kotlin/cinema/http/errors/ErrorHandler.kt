@@ -35,4 +35,10 @@ class ErrorHandler {
         val msg = "Internal http call returned status ${e.statusCode}"
         return ResponseEntity.status(HttpStatus.resolve(e.statusCode) ?: HttpStatus.BAD_REQUEST).body(msg)
     }
+
+    @ExceptionHandler(exception = [NoSuchElementException::class, IllegalArgumentException::class])
+    fun handleDatabaseError(e: Exception): ResponseEntity<String> {
+        val msg = "Unexpected database error occurred"
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(msg)
+    }
 }
